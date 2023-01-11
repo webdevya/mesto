@@ -3,3 +3,5 @@
 @import url(../vendor/fonts/inter/inter-medium.css);
 @import url(../vendor/fonts/inter/inter-bold.css);
 @import url(../vendor/fonts/inter/inter-black.css);
+
+@import url(../blocks/page/page.css);
