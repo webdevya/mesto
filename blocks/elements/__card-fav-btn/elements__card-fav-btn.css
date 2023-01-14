@@ -1,0 +1,17 @@
+.elements__card-fav-btn {
+  grid-area: fav;
+
+  color: transparent;
+  width: 22px;
+  height: 19px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background: transparent url("../../../images/fav.svg");
+  border: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 30px 15px;
+
+  justify-self: end;
+}

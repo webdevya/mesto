@@ -6,7 +6,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  content: '';
   background: transparent url("../../../images/add_button.svg");
   border: 2px solid #fff;
   border-radius: 2px;
