@@ -1,0 +1,24 @@
+.profile__name {
+  /* grid-area: name; */
+
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  /* or 114% */
+  margin: 0;
+  padding: 0;
+
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 719px) {
+  .profile__name {
+    /* text-align: center; */
+    font-size: 27px;
+    line-height: 33px;
+    margin: 0 auto;
+
+  }
+}

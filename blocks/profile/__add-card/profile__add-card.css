@@ -1,0 +1,14 @@
+.profile__add-card {
+  justify-self: flex-end;
+  margin: 0 0 0 auto;
+  box-sizing: border-box;
+}
+
+
+@media screen and (max-width: 719px) {
+  .profile__add-card {
+    justify-self: flex-start;
+    margin: 0;
+    width: 100%;
+  }
+}

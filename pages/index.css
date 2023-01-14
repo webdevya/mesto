@@ -11,3 +11,14 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/header/__line/header__line.css);
+
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__info/__info-row/profile__info-row.css);
+@import url(../blocks/profile/__info/__name/profile__name.css);
+@import url(../blocks/profile/__info/__about/profile__about.css);
+@import url(../blocks/profile/__info/__edit-btn/profile__edit-btn.css);
+@import url(../blocks/profile/__add-card/profile__add-card.css);
+@import url(../blocks/profile/__add-btn/profile__add-btn.css);
