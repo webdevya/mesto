@@ -30,3 +30,7 @@
 @import url(../blocks/elements/__card-caption/elements__card-caption.css);
 @import url(../blocks/elements/__card-fav-btn/elements__card-fav-btn.css);
 @import url(../blocks/elements/__card-fav-btn/elements__card-fav-btn_state.css);
+
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__text/footer__text.css);
