@@ -14,4 +14,10 @@
   margin: 30px 15px;
 
   justify-self: end;
+
+  transition: opacity 0.3s ease;
+}
+
+.elements__card-fav-btn:hover {
+  opacity: 0.5;
 }

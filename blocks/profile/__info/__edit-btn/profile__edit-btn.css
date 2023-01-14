@@ -11,6 +11,12 @@
   align-self: flex-end;
   margin-bottom: 9px;
   padding: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+.profile__edit-btn:hover {
+  opacity: 0.6;
 }
 
 
