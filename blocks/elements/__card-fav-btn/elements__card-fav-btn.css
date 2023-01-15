@@ -5,9 +5,10 @@
   width: 22px;
   height: 19px;
   background-size: cover;
+
+  background: transparent url("../../../images/fav.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background: transparent url("../../../images/fav.svg");
   border: 0;
   box-sizing: border-box;
   padding: 0;

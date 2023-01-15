@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
@@ -64,7 +64,19 @@
   <footer class="footer">
     <p class="footer__text">© 2023 Mesto Russia</p>
   </footer>
-  <section class="edit-form"></section>
+  <section class="edit-view">
+    <form class="edit-view__form">
+      <div class="edit-view__close-btn"></div>
+      <h2 class="edit-view__form-header">Редактировать профиль</h2>
+      <fieldset class="edit-view__inputs">
+        <input type="text" class="edit-view__input" id="naming" name="naming" placeholder="Имя" required>
+        <input type="text" class="edit-view__input" id="aboutself" name="aboutself" placeholder="О себе" required>
+      </fieldset>
+      <fieldset class="edit-view__handlers">
+        <input type="submit" class="edit-view__save-btn" value="Сохранить">
+      </fieldset>
+    </form>
+  </section>
   <script src="./blocks/elements/__card-fav-btn/elements__card-fav-btn.js"></script>
 </body>
 

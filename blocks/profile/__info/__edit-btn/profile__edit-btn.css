@@ -3,9 +3,10 @@
   color: transparent;
   width: 24px;
   height: 24px;
+
+  background: transparent url("../../../../images/edit_button.svg");
   background-repeat: no-repeat;
   background-size: contain;
-  background: transparent url("../../../../images/edit_button.svg");
   border: 1px solid #fff;
   border-radius: 1px;
   align-self: flex-end;
@@ -24,8 +25,6 @@
   .profile__edit-btn {
     width: 18px;
     height: 18px;
-    background-repeat: no-repeat;
-    background-size: contain;
     margin-bottom: 5px;
   }
 }

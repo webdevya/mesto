@@ -1,0 +1,33 @@
+.edit-view__close-btn {
+  width: 32px;
+  height: 32px;
+
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  display: flex;
+  cursor: pointer;
+
+  background: transparent url("../../../images/сlose.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+.edit-view__close-btn:hover {
+  opacity: 0.6;
+}
+
+
+@media screen and (max-width: 719px) {
+  .edit-view__close-btn {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}

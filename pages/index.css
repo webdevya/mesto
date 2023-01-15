@@ -34,3 +34,12 @@
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
+
+@import url(../blocks/edit-view/edit-view.css);
+@import url(../blocks/edit-view/__handlers/edit-view__handlers.css);
+@import url(../blocks/edit-view/__close-btn/edit-view__close-btn.css);
+@import url(../blocks/edit-view/__form-header/edit-view__form-header.css);
+@import url(../blocks/edit-view/__form/edit-view__form.css);
+@import url(../blocks/edit-view/__input/edit-view__input.css);
+@import url(../blocks/edit-view/__inputs/edit-view__inputs.css);
+@import url(../blocks/edit-view/__save-btn/edit-view__save-btn.css);
