@@ -2,8 +2,27 @@
   justify-self: flex-end;
   margin: 0 0 0 auto;
   box-sizing: border-box;
+
+  color: transparent;
+  width: 150px;
+  height: 50px;
+
+  background: transparent url("../../../images/add_button.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  padding: 0;
+
+  transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
+.profile__add-card:hover {
+  opacity: 0.6;
+
+}
 
 @media screen and (max-width: 719px) {
   .profile__add-card {
