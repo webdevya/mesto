@@ -1,4 +1,5 @@
 function toggleFavState(evt) {
+  evt.preventDefault();
   let btn = evt.currentTarget;
   btn.classList.toggle('elements__card-fav-btn_state_checked');
 }

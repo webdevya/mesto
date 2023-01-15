@@ -17,6 +17,7 @@
   justify-self: end;
 
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .elements__card-fav-btn:hover {

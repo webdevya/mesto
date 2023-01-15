@@ -17,10 +17,12 @@
   padding: 0;
 
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .profile__add-btn:hover {
   opacity: 0.6;
+
 }
 
 @media screen and (max-width: 719px) {
