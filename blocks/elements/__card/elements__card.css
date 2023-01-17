@@ -1,13 +1,10 @@
 .elements__card {
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: auto, min-content;
-  grid-template-rows: repeat(2, auto);
-  grid-template-areas:
-    "image image"
-    "caption fav";
   background-color: #fff;
   margin: 0;
   padding: 0;
-
+  /* text-overflow: ellipsis; */
+  overflow: hidden;
+  /* white-space: nowrap;
+   */
 }

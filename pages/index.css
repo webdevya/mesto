@@ -25,10 +25,14 @@
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__card/elements__card.css);
+@import url(../blocks/elements/__card-figure/elements__card-figure.css);
 @import url(../blocks/elements/__card-image/elements__card-image.css);
 @import url(../blocks/elements/__card-caption/elements__card-caption.css);
 @import url(../blocks/elements/__card-fav-btn/elements__card-fav-btn.css);
 @import url(../blocks/elements/__card-fav-btn/elements__card-fav-btn_state.css);
+@import url(../blocks/elements/__card-caption-text/elements__card-caption-text.css);
+@import url(../blocks/elements/__cards/elements__cards.css);
+
 
 
 @import url(../blocks/footer/footer.css);
