@@ -10,7 +10,6 @@
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
-@import url(../blocks/header/__line/header__line.css);
 
 
 @import url(../blocks/profile/profile.css);
@@ -44,6 +43,7 @@
 @import url(../blocks/edit-view/__close-btn/edit-view__close-btn.css);
 @import url(../blocks/edit-view/__form-header/edit-view__form-header.css);
 @import url(../blocks/edit-view/__form/edit-view__form.css);
+@import url(../blocks/edit-view/__form-group/edit-view__form-group.css);
 @import url(../blocks/edit-view/__input/edit-view__input.css);
 @import url(../blocks/edit-view/__inputs/edit-view__inputs.css);
 @import url(../blocks/edit-view/__save-btn/edit-view__save-btn.css);

@@ -12,7 +12,6 @@
 <body class="page">
   <header class="header">
     <img class="header__logo" src="./images/logo.svg" alt="Логотип проекта Место-Россия">
-    <hr class="header__line">
   </header>
   <main class="content">
     <section class="profile">
@@ -32,7 +31,7 @@
           <figure class="elements__card-figure">
             <img class="elements__card-image" src="./images/card-karachaevsk.jpg" alt="Карачаевск">
             <figcaption class="elements__card-caption">
-              <p class="elements__card-caption-text">Карачаевск</p>
+              <h2 class="elements__card-caption-text">Карачаевск</h2>
               <button class="elements__card-fav-btn"></button>
             </figcaption>
           </figure>
@@ -41,7 +40,7 @@
           <figure class="elements__card-figure">
             <img class="elements__card-image" src="./images/card-elbrus.jpg" alt="Гора Эльбрус">
             <figcaption class="elements__card-caption">
-              <p class="elements__card-caption-text">Гора Эльбрус</p>
+              <h2 class="elements__card-caption-text">Гора Эльбрус</h2>
               <button class="elements__card-fav-btn"></button>
             </figcaption>
           </figure>
@@ -50,8 +49,8 @@
           <figure class="elements__card-figure">
             <img class="elements__card-image" src="./images/card-dombay.jpg" alt="Домбай">
             <figcaption class="elements__card-caption">
-              <p class="elements__card-caption-text">Домбай</p>
-              <button class="elements__card-fav-btn"></button>
+              <h2 class="elements__card-caption-text">Домбай</>
+                <button class="elements__card-fav-btn"></button>
             </figcaption>
           </figure>
         </li>
@@ -59,7 +58,7 @@
           <figure class="elements__card-figure">
             <img class="elements__card-image" src="./images/card-elbrus.jpg" alt="Гора Эльбрус">
             <figcaption class="elements__card-caption">
-              <p class="elements__card-caption-text">Гора Эльбрус</p>
+              <h2 class="elements__card-caption-text">Гора Эльбрус</h2>
               <button class="elements__card-fav-btn"></button>
             </figcaption>
           </figure>
@@ -68,7 +67,7 @@
           <figure class="elements__card-figure">
             <img class="elements__card-image" src="./images/card-dombay.jpg" alt="Домбай">
             <figcaption class="elements__card-caption">
-              <p class="elements__card-caption-text">Домбай</p>
+              <h2 class="elements__card-caption-text">Домбай</h2>
               <button class="elements__card-fav-btn"></button>
             </figcaption>
           </figure>
@@ -77,7 +76,7 @@
           <figure class="elements__card-figure">
             <img class="elements__card-image" src="./images/card-karachaevsk.jpg" alt="Карачаевск">
             <figcaption class="elements__card-caption">
-              <p class="elements__card-caption-text">Карачаево-Черкессия</p>
+              <h2 class="elements__card-caption-text">Карачаево-Черкессия</h2>
               <button class="elements__card-fav-btn"></button>
             </figcaption>
           </figure>
@@ -88,19 +87,19 @@
   <footer class="footer">
     <p class="footer__text">© 2023 Mesto Russia</p>
   </footer>
-  <section class="edit-view">
-    <form class="edit-view__form">
+  <dialog class="edit-view">
+    <div class="edit-view__form-group">
       <div class="edit-view__close-btn"></div>
       <h2 class="edit-view__form-header">Редактировать профиль</h2>
-      <fieldset class="edit-view__inputs">
-        <input type="text" class="edit-view__input" id="naming" name="naming" placeholder="Имя" required>
-        <input type="text" class="edit-view__input" id="aboutself" name="aboutself" placeholder="О себе" required>
-      </fieldset>
-      <fieldset class="edit-view__handlers">
-        <input type="submit" class="edit-view__save-btn" value="Сохранить">
-      </fieldset>
-    </form>
-  </section>
+      <form class="edit-view__form">
+        <fieldset class="edit-view__inputs">
+          <input type="text" class="edit-view__input" id="naming" name="naming" placeholder="Имя" required>
+          <input type="text" class="edit-view__input" id="aboutself" name="aboutself" placeholder="О себе" required>
+        </fieldset>
+        <button class="edit-view__save-btn">Сохранить</button>
+      </form>
+    </div>
+  </dialog>
   <script src="./blocks/elements/__card-fav-btn/elements__card-fav-btn.js"></script>
   <script src="./blocks/profile/__info/__edit-btn/profile__edit-btn.js"></script>
   <script src="./blocks/edit-view/__close-btn/edit-view__close-btn.js"></script>
