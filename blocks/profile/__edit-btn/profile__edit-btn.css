@@ -1,7 +1,7 @@
 .profile__edit-btn {
   grid-area: edit-btn;
   color: transparent;
-  width: 24px;
+  min-width: 24px;
   height: 24px;
 
   background: transparent url("../../../images/edit_button.svg");
