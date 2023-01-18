@@ -1,5 +1,4 @@
 .profile__edit-btn {
-  grid-area: edit-btn;
   color: transparent;
   min-width: 24px;
   height: 24px;
@@ -9,12 +8,13 @@
   background-size: contain;
   border: 1px solid #fff;
   border-radius: 1px;
-  align-self: flex-end;
-  margin-bottom: 9px;
   padding: 0;
-
+  display: block;
   transition: opacity 0.3s ease;
   cursor: pointer;
+  position: absolute;
+  bottom: 9px;
+  right: -42px;
 }
 
 .profile__edit-btn:hover {
@@ -25,8 +25,9 @@
 
 @media screen and (max-width: 719px) {
   .profile__edit-btn {
-    width: 18px;
+    min-width: 18px;
     height: 18px;
-    margin-bottom: 5px;
+    bottom: 5px;
+    right: -28px;
   }
 }

@@ -28,7 +28,7 @@
 @import url(../blocks/elements/__card-image/elements__card-image.css);
 @import url(../blocks/elements/__card-caption/elements__card-caption.css);
 @import url(../blocks/elements/__card-fav-btn/elements__card-fav-btn.css);
-@import url(../blocks/elements/__card-fav-btn/elements__card-fav-btn_state.css);
+@import url(../blocks/elements/__card-fav-btn/_state/elements__card-fav-btn_state.css);
 @import url(../blocks/elements/__card-caption-text/elements__card-caption-text.css);
 @import url(../blocks/elements/__cards/elements__cards.css);
 
@@ -38,7 +38,7 @@
 @import url(../blocks/footer/__text/footer__text.css);
 
 @import url(../blocks/edit-view/edit-view.css);
-@import url(../blocks/edit-view/edit-view_opened.css);
+@import url(../blocks/edit-view/_opened/edit-view_opened.css);
 @import url(../blocks/edit-view/__close-btn/edit-view__close-btn.css);
 @import url(../blocks/edit-view/__form-header/edit-view__form-header.css);
 @import url(../blocks/edit-view/__form/edit-view__form.css);

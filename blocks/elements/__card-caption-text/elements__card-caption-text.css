@@ -1,6 +1,8 @@
 .elements__card-caption-text {
   padding: 0;
-  margin: 25px 0 31px 21px;
+  /* margin: 25px 0 31px 21px; */
+  margin: 25px 0 26px 21px;
+
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-style: normal;
   font-weight: 900;

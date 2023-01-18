@@ -1,5 +1,4 @@
 .profile__about {
-  /* grid-area: about; */
 
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-style: normal;
@@ -10,18 +9,25 @@
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-
+  max-width: 500px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
+@media screen and (max-width: 907px) {
+  .profile__about {
+    max-width: calc(100vw - 432px);
+  }
+}
+
 
 @media screen and (max-width: 719px) {
   .profile__about {
-    /* text-align: center; */
+
     font-size: 14px;
     line-height: 17px;
-    /* padding-top: 14px; */
+    max-width: calc(100vw - 94px);
+
   }
 }

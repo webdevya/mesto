@@ -9,7 +9,7 @@
   /* or 114% */
   margin: 0;
   padding: 0;
-
+  max-width: 500px;
   color: #FFFFFF;
 
   white-space: nowrap;
@@ -17,12 +17,16 @@
   overflow: hidden;
 }
 
+@media screen and (max-width: 907px) {
+  .profile__name {
+    max-width: calc(100vw - 432px);
+  }
+}
+
 @media screen and (max-width: 719px) {
   .profile__name {
-    /* text-align: center; */
+    max-width: calc(100vw - 19px * 2 - 28px * 2);
     font-size: 27px;
     line-height: 33px;
-    margin: 0 auto;
-
   }
 }

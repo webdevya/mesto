@@ -14,7 +14,7 @@
   margin: 0 20px;
   align-self: center;
   /* justify-self: center; */
-
+  display: block;
   transition: opacity 0.3s ease;
   cursor: pointer;
 

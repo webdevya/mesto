@@ -18,7 +18,7 @@
 }
 
 .edit-view__input:focus {
-  outline-color: #fff;
+  outline: 0;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
