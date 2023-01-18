@@ -8,6 +8,11 @@
 @import url(../blocks/page/page.css);
 
 
+@import url(../blocks/image-btn/image-btn.css);
+@import url(../blocks/image-btn/_hover-opacity/image-btn_hover-opacity_low.css);
+@import url(../blocks/image-btn/_hover-opacity/image-btn_hover-opacity_medium.css);
+
+
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 

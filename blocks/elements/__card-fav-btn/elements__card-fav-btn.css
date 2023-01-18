@@ -1,25 +1,16 @@
 .elements__card-fav-btn {
 
-  color: transparent;
   min-width: 22px;
   height: 19px;
 
+  background-image: url("../../../images/fav.svg");
 
-  background: transparent url("../../../images/fav.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   border: 0;
   padding: 0;
   margin: 0 20px;
   align-self: center;
-  /* justify-self: center; */
+
   display: block;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
 
-}
 
-.elements__card-fav-btn:hover {
-  opacity: 0.5;
 }
