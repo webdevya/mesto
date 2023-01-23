@@ -59,14 +59,39 @@ function openPopup(evt) {
   jobInput.value = about;
 }
 
+function removeCard(evt) {
+  evt.preventDefault();
+  let el = evt.currentTarget;
+  let resume = true;
+  while (resume) {
+    if (!el.classList.contains('elements__card')) {
+      el = el.parentElement;
+    }
+    else {
+      resume = false;
+      el.remove();
+    }
+  }
+
+}
 
 function subscribeFavs() {
-  let btns = document.querySelectorAll('.elements__card-fav-btn')
+  let btns = document.querySelectorAll('.elements__card-fav-btn');
   for (let i = 0; i < btns.length; i++) {
     let btn = btns[i];
     btn.addEventListener('click', toggleFavState);
   }
 }
+
+
+function subscribeTrashes() {
+  let btns = document.querySelectorAll('.elements__card-trash-btn');
+  for (let i = 0; i < btns.length; i++) {
+    let btn = btns[i];
+    btn.addEventListener('click', removeCard);
+  }
+}
+
 
 function subscribeCloseEditView() {
   let btnClose = document.querySelector('.edit-view__close-btn');
@@ -83,6 +108,7 @@ function subscribeOpenEditView() {
 subscribeOpenEditView();
 subscribeCloseEditView();
 subscribeFavs();
+subscribeTrashes();
 
 formElement.addEventListener('submit', handleFormSubmit);
 
