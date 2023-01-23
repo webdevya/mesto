@@ -1,6 +1,6 @@
 
 let formElement = document.querySelector('.edit-view__form');
-
+let elementsUl = document.querySelector('.elements__cards')
 function closePopup() {
   let view = document.querySelector('.edit-view');
   if (view.classList.contains('edit-view_opened')) {
@@ -72,7 +72,53 @@ function removeCard(evt) {
       el.remove();
     }
   }
+}
 
+function addCard(caption, link) {
+  let cardHtml = `<li class="elements__card">
+<figure class="elements__card-figure">
+  <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
+  <img class="elements__card-image" src="${link}" alt="${caption}">
+  <figcaption class="elements__card-caption">
+    <h2 class="elements__card-caption-text">${caption}</h2>
+    <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
+  </figcaption>
+</figure>
+</li>`;
+  elementsUl.insertAdjacentHTML("afterbegin", cardHtml);
+}
+
+function initStartCards() {
+  const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
+
+  for (let i = initialCards.length - 1; i >= 0; i--) {
+    addCard(initialCards[i].name, initialCards[i].link);
+  }
 }
 
 function subscribeFavs() {
@@ -107,13 +153,14 @@ function subscribeOpenEditView() {
 
 subscribeOpenEditView();
 subscribeCloseEditView();
-subscribeFavs();
-subscribeTrashes();
+
+
 
 formElement.addEventListener('submit', handleFormSubmit);
 
-
-
+initStartCards();
+subscribeTrashes();
+subscribeFavs();
 
 
 
