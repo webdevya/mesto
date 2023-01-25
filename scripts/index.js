@@ -14,8 +14,11 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
 
   // Находим поля формы в DOM
-  let nameInput = formElement.querySelector('#naming');
-  let jobInput = formElement.querySelector('#aboutself');
+
+
+  let nameInput = formElement.querySelector('#edit-view__naming');
+  let jobInput = formElement.querySelector('#edit-view__input2');
+
 
   // Получите значение полей jobInput и nameInput из свойства value
   let name = nameInput.value;
@@ -37,27 +40,36 @@ function toggleFavState(evt) {
   btn.classList.toggle('elements__card-fav-btn_state_checked');
 }
 
-
-function openPopup(evt) {
-  evt.preventDefault();
+function openPopup(header, input1, input2, placeholder1, placeholder2) {
   let view = document.querySelector('.edit-view');
   view.classList.add('edit-view_opened');
 
-  let formElement = document.querySelector('.edit-view__form');
-  let nameInput = formElement.querySelector('#naming');
-  let jobInput = formElement.querySelector('#aboutself');
+  let formElement = document.querySelector('.edit-view');
+  let nameInput = formElement.querySelector('#edit-view__naming');
+  let input2El = formElement.querySelector('#edit-view__input2');
+  let headEl = formElement.querySelector('.edit-view__form-header');
 
+  nameInput.value = input1;
+  nameInput.setAttribute('placeholder', placeholder1);
 
+  input2El.value = input2;
+  input2El.setAttribute('placeholder', placeholder2);
+
+  headEl.textContent = header;
+}
+
+function openPopupProfile(evt) {
   let profile = document.querySelector('.profile');
   let nameProfile = profile.querySelector('.profile__name');
   let aboutProfile = profile.querySelector('.profile__about');
 
   let name = nameProfile.textContent;
   let about = aboutProfile.textContent;
+  let header = 'Редактировать профиль';
+  openPopup(header, name, about, 'Имя', 'О себе')
 
-  nameInput.value = name;
-  jobInput.value = about;
 }
+
 
 function removeCard(evt) {
   evt.preventDefault();
@@ -148,7 +160,7 @@ function subscribeCloseEditView() {
 
 function subscribeOpenEditView() {
   let btnEdit = document.querySelector('.profile__edit-btn');
-  btnEdit.addEventListener('click', openPopup);
+  btnEdit.addEventListener('click', openPopupProfile);
 }
 
 subscribeOpenEditView();
