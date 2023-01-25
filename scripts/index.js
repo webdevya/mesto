@@ -40,6 +40,10 @@ function profileSubmitCallBack(name, text) {
 }
 
 
+function addCardSubmitCallBack(name, text) {
+  addCard(name, text);
+}
+
 function toggleFavState(evt) {
   evt.preventDefault();
   let btn = evt.currentTarget;
@@ -75,8 +79,15 @@ function openPopupProfile(evt) {
 
   submitCallBack = profileSubmitCallBack;
 
-  openPopup(header, name, about, 'Имя', 'О себе')
+  openPopup(header, name, about, 'Имя', 'О себе');
 
+}
+
+function openPopupAddCard(evt) {
+
+  submitCallBack = addCardSubmitCallBack;
+
+  openPopup('Новое место', '', '', 'Название', 'Ссылка на картинку');
 }
 
 
@@ -107,6 +118,11 @@ function addCard(caption, link) {
 </figure>
 </li>`;
   elementsUl.insertAdjacentHTML("afterbegin", cardHtml);
+  let elements = document.querySelector('.elements__cards');
+  let btnFav = elements.querySelector('.elements__card-fav-btn');
+  let btnTrash = elements.querySelector('.elements__card-trash-btn');
+  subscribeFav(btnFav);
+  subscribeTrash(btnTrash);
 }
 
 function initStartCards() {
@@ -146,16 +162,23 @@ function subscribeFavs() {
   let btns = document.querySelectorAll('.elements__card-fav-btn');
   for (let i = 0; i < btns.length; i++) {
     let btn = btns[i];
-    btn.addEventListener('click', toggleFavState);
+    subscribeFav(btn);
   }
 }
 
+function subscribeFav(btnFav) {
+  btnFav.addEventListener('click', toggleFavState);
+}
+
+function subscribeTrash(btnTrash) {
+  btnTrash.addEventListener('click', removeCard);
+}
 
 function subscribeTrashes() {
   let btns = document.querySelectorAll('.elements__card-trash-btn');
   for (let i = 0; i < btns.length; i++) {
     let btn = btns[i];
-    btn.addEventListener('click', removeCard);
+    subscribeTrash(btn);
   }
 }
 
@@ -167,12 +190,19 @@ function subscribeCloseEditView() {
   }
 }
 
-function subscribeOpenEditView() {
+function subscribeOpenEditProfileView() {
   let btnEdit = document.querySelector('.profile__edit-btn');
   btnEdit.addEventListener('click', openPopupProfile);
 }
 
-subscribeOpenEditView();
+function subscribeOpenAddCardView() {
+  let btnEdit = document.querySelector('.profile__add-card');
+  btnEdit.addEventListener('click', openPopupAddCard);
+}
+subscribeFavs();
+subscribeTrashes();
+subscribeOpenEditProfileView();
+subscribeOpenAddCardView();
 subscribeCloseEditView();
 
 
@@ -180,8 +210,8 @@ subscribeCloseEditView();
 formElement.addEventListener('submit', handleFormSubmit);
 
 initStartCards();
-subscribeTrashes();
-subscribeFavs();
+
+
 
 
 
