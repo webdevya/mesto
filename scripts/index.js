@@ -1,38 +1,44 @@
 
 let formElement = document.querySelector('.edit-view__form');
 let elementsUl = document.querySelector('.elements__cards')
+
+let submitCallBack = null;
+
 function closePopup() {
   let view = document.querySelector('.edit-view');
   if (view.classList.contains('edit-view_opened')) {
     view.classList.remove('edit-view_opened');
   }
+  submitCallBack = null;
 }
 
 
-
 function handleFormSubmit(evt) {
+
   evt.preventDefault();
 
-  // Находим поля формы в DOM
-
-
   let nameInput = formElement.querySelector('#edit-view__naming');
-  let jobInput = formElement.querySelector('#edit-view__input2');
+  let input2El = formElement.querySelector('#edit-view__input2');
 
-
-  // Получите значение полей jobInput и nameInput из свойства value
   let name = nameInput.value;
-  let about = jobInput.value;
+  let text = input2El.value;
+
+  if (submitCallBack !== null)
+    submitCallBack(name, text);
+
+  closePopup();
+}
+
+function profileSubmitCallBack(name, text) {
 
   let profile = document.querySelector('.profile');
   let nameProfile = profile.querySelector('.profile__name');
   let aboutProfile = profile.querySelector('.profile__about');
 
   nameProfile.textContent = name;
-  aboutProfile.textContent = about;
-
-  closePopup();
+  aboutProfile.textContent = text;
 }
+
 
 function toggleFavState(evt) {
   evt.preventDefault();
@@ -66,6 +72,9 @@ function openPopupProfile(evt) {
   let name = nameProfile.textContent;
   let about = aboutProfile.textContent;
   let header = 'Редактировать профиль';
+
+  submitCallBack = profileSubmitCallBack;
+
   openPopup(header, name, about, 'Имя', 'О себе')
 
 }
