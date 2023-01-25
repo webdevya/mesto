@@ -1,4 +1,4 @@
-.edit-view__save-btn {
+.popup__save-btn {
   margin: 48px 36px 37px;
   padding: 0;
 
@@ -18,19 +18,19 @@
 }
 
 
-.edit-view__save-btn:hover {
+.popup__save-btn:hover {
   opacity: .8;
 
 }
 
 
 /* Замена цвета внешней линии при фокусе кнопки */
-.edit-view__save-btn:focus {
+.popup__save-btn:focus {
   outline-color: #fff6c5;
 }
 
 @media screen and (max-width: 719px) {
-  .edit-view__save-btn {
+  .popup__save-btn {
     font-size: 14px;
     line-height: 17px;
     margin: 45px 22px 25px;

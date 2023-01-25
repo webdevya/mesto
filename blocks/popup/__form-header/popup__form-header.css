@@ -1,4 +1,4 @@
-.edit-view__form-header {
+.popup__form-header {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-style: normal;
   font-weight: 900;
@@ -13,7 +13,7 @@
 
 
 @media screen and (max-width: 719px) {
-  .edit-view__form-header {
+  .popup__form-header {
     font-size: 18px;
     line-height: 22px;
     margin: 25px 22px 0;

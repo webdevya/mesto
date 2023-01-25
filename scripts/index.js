@@ -1,13 +1,13 @@
 
-let formElement = document.querySelector('.edit-view__form');
+let formElement = document.querySelector('.popup__form');
 let elementsUl = document.querySelector('.elements__cards')
 
 let submitCallBack = null;
 
 function closePopup() {
-  let view = document.querySelector('.edit-view');
-  if (view.classList.contains('edit-view_opened')) {
-    view.classList.remove('edit-view_opened');
+  let view = document.querySelector('.popup');
+  if (view.classList.contains('popup_opened')) {
+    view.classList.remove('popup_opened');
   }
   submitCallBack = null;
 }
@@ -51,13 +51,13 @@ function toggleFavState(evt) {
 }
 
 function openPopup(header, input1, input2, placeholder1, placeholder2) {
-  let view = document.querySelector('.edit-view');
-  view.classList.add('edit-view_opened');
+  let view = document.querySelector('.popup');
+  view.classList.add('popup_opened');
 
-  let formElement = document.querySelector('.edit-view');
+  let formElement = document.querySelector('.popup');
   let nameInput = formElement.querySelector('#edit-view__naming');
   let input2El = formElement.querySelector('#edit-view__input2');
-  let headEl = formElement.querySelector('.edit-view__form-header');
+  let headEl = formElement.querySelector('.popup__form-header');
 
   nameInput.value = input1;
   nameInput.setAttribute('placeholder', placeholder1);
@@ -184,7 +184,7 @@ function subscribeTrashes() {
 
 
 function subscribeCloseEditView() {
-  let btnClose = document.querySelector('.edit-view__close-btn');
+  let btnClose = document.querySelector('.popup__close-btn');
   if (btnClose != null) {
     btnClose.addEventListener('click', closePopup);
   }

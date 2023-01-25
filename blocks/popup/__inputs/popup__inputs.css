@@ -1,4 +1,4 @@
-.edit-view__inputs {
+.popup__inputs {
   margin: 54px 36px 0;
   padding: 0;
   display: flex;
@@ -9,7 +9,7 @@
 
 
 @media screen and (max-width: 719px) {
-  .edit-view__inputs {
+  .popup__inputs {
     margin: 75px 22px 0;
   }
 }

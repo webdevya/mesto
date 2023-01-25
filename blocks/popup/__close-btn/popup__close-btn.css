@@ -1,4 +1,4 @@
-.edit-view__close-btn {
+.popup__close-btn {
   width: 32px;
   height: 32px;
 
@@ -15,7 +15,7 @@
 
 
 @media screen and (max-width: 719px) {
-  .edit-view__close-btn {
+  .popup__close-btn {
     width: 20px;
     height: 20px;
     top: -36px;

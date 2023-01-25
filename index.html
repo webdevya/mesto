@@ -93,17 +93,26 @@
   <footer class="footer">
     <p class="footer__text">© 2023 Mesto Russia</p>
   </footer>
-  <dialog class="edit-view">
-    <div class="edit-view__form-group">
-      <button type="reset" class="edit-view__close-btn image-btn image-btn_hover-opacity_medium"></button>
-      <h2 class="edit-view__form-header">Редактировать</h2>
-      <form class="edit-view__form">
-        <fieldset class="edit-view__inputs">
-          <input type="text" class="edit-view__input" id="edit-view__naming" name="naming" required>
-          <input type="text" class="edit-view__input" id="edit-view__input2" name="edit-view__input2" required>
+  <dialog class="popup">
+    <div class="popup__form-group">
+      <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
+      <h2 class="popup__form-header">Редактировать</h2>
+      <form class="popup__form">
+        <fieldset class="popup__inputs">
+          <input type="text" class="popup__input" id="edit-view__naming" name="edit-view__naming" required>
+          <input type="text" class="popup__input" id="edit-view__input2" name="edit-view__input2" required>
         </fieldset>
-        <button type="submit" class="edit-view__save-btn">Сохранить</button>
+        <button type="submit" class="popup__save-btn">Сохранить</button>
       </form>
+    </div>
+    <div class="popup__image-group">
+      <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
+      <figure class="popup__image-figure">
+        <img class="popup__image" src="#" alt="Описание">
+        <figcaption class="popup__image-caption">
+          <h2 class="popup__image-caption-text">Описание</h2>
+        </figcaption>
+      </figure>
     </div>
   </dialog>
   <script src="./scripts/index.js"></script>
