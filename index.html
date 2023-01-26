@@ -93,8 +93,8 @@
   <footer class="footer">
     <p class="footer__text">© 2023 Mesto Russia</p>
   </footer>
-  <dialog class="popup">
-    <div class="popup__form-group">
+  <dialog class="popup popup_overlay-opacity_middle popup_type_form">
+    <div class="popup__form-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
       <h2 class="popup__form-header">Редактировать</h2>
       <form class="popup__form">
@@ -105,9 +105,11 @@
         <button type="submit" class="popup__save-btn">Сохранить</button>
       </form>
     </div>
-    <div class="popup__image-group">
+  </dialog>
+  <dialog class="popup popup_overlay-opacity_high popup_type_img">
+    <div class="popup__image-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
-      <figure class="popup__image-figure">
+      <figure class="popup__form">
         <img class="popup__image" src="#" alt="Описание">
         <figcaption class="popup__image-caption">
           <h2 class="popup__image-caption-text">Описание</h2>
