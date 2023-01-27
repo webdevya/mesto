@@ -22,8 +22,8 @@ function handleFormSubmit(evt) {
 
   evt.preventDefault();
 
-  let nameInput = formElement.querySelector('#edit-view__naming');
-  let input2El = formElement.querySelector('#edit-view__input2');
+  let nameInput = formElement.querySelector('.popup__input_item_naming');
+  let input2El = formElement.querySelector('.popup__input_item_input2');
 
   let name = nameInput.value;
   let text = input2El.value;
@@ -63,8 +63,6 @@ function openPopupImg(evt) {
   let caption = img.getAttribute('alt');
   let src = img.getAttribute('src');
 
-
-
   let popup = document.querySelector('.popup_type_img');
 
   let imgPopup = popup.querySelector('.popup__image');
@@ -74,10 +72,7 @@ function openPopupImg(evt) {
   let imgCaption = popup.querySelector('.popup__image-caption-text');
   imgCaption.textContent = caption;
 
-
   popup.classList.add('popup_opened');
-
-
 }
 
 function openPopupForm(header, input1, input2, placeholder1, placeholder2) {
@@ -86,8 +81,8 @@ function openPopupForm(header, input1, input2, placeholder1, placeholder2) {
 
 
   let formElement = document.querySelector('.popup');
-  let nameInput = popup.querySelector('#edit-view__naming');
-  let input2El = popup.querySelector('#edit-view__input2');
+  let nameInput = popup.querySelector('.popup__input_item_naming');
+  let input2El = popup.querySelector('popup__input_item_input2');
   let headEl = popup.querySelector('.popup__form-header');
 
   nameInput.value = input1;
@@ -218,6 +213,15 @@ function subscribeOpenImg(img) {
   img.addEventListener('click', openPopupImg);
 }
 
+function subscribeOpenImgs() {
+  let imgs = document.querySelectorAll('.elements__card-image');
+  for (let i = 0; i < imgs.length; i++) {
+    let img = imgs[i];
+    subscribeOpenImg(img);
+  }
+}
+
+
 function subscribeTrashes() {
   let btns = document.querySelectorAll('.elements__card-trash-btn');
   for (let i = 0; i < btns.length; i++) {
@@ -255,6 +259,9 @@ function subscribeCloseByOverlay() {
 
 subscribeFavs();
 subscribeTrashes();
+subscribeOpenImgs()
+
+
 subscribeOpenEditProfileView();
 subscribeOpenAddCardView();
 subscribeCloseEditView();
