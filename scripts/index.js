@@ -82,7 +82,7 @@ function openPopupForm(header, input1, input2, placeholder1, placeholder2) {
 
   let formElement = document.querySelector('.popup');
   let nameInput = popup.querySelector('.popup__input_item_naming');
-  let input2El = popup.querySelector('popup__input_item_input2');
+  let input2El = popup.querySelector('.popup__input_item_input2');
   let headEl = popup.querySelector('.popup__form-header');
 
   nameInput.value = input1;
@@ -133,7 +133,13 @@ function removeCard(evt) {
 }
 
 function closeByOverlayClick(evt) {
-  if (evt.currentTarget == evt.target) {
+  if (evt.currentTarget === evt.target) {
+    closePopup();
+  }
+}
+
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
     closePopup();
   }
 }
@@ -253,9 +259,9 @@ function subscribeCloseByOverlay() {
 
   for (let i = 0; i < popups.length; i++) {
     popups[i].addEventListener('click', closeByOverlayClick);
+
   }
 }
-
 
 subscribeFavs();
 subscribeTrashes();
@@ -267,14 +273,10 @@ subscribeOpenAddCardView();
 subscribeCloseEditView();
 subscribeCloseByOverlay();
 
-
-
 formElement.addEventListener('submit', handleFormSubmit);
+document.addEventListener('keydown', closeByEsc);
 
 initStartCards();
-
-
-
 
 
 
