@@ -93,16 +93,31 @@
   <footer class="footer">
     <p class="footer__text">© 2023 Mesto Russia</p>
   </footer>
-  <dialog class="popup popup_overlay-opacity_middle popup_type_form">
+  <dialog class="popup popup_overlay-opacity_middle popup_type_form-profile">
     <div class="popup__form-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
-      <h2 class="popup__form-header">Редактировать</h2>
+      <h2 class="popup__form-header">Редактировать профиль</h2>
       <form class="popup__form">
         <fieldset class="popup__inputs">
-          <input type="text" class="popup__input popup__input_item_naming" id="edit-view__naming"
-            name="edit-view__naming" required>
-          <input type="text" class="popup__input popup__input_item_input2" id="edit-view__input2"
-            name="edit-view__input2" required>
+          <input type="text" class="popup__input popup__input_item_naming" placeholder="Имя"
+            id="edit-view__profile-name" name="edit-view__profile-name" required>
+          <input type="text" class="popup__input popup__input_item_input2" placeholder="О себе"
+            id="edit-view__profile-about" name="edit-view__profile-about" required>
+        </fieldset>
+        <button type="submit" class="popup__save-btn">Сохранить</button>
+      </form>
+    </div>
+  </dialog>
+  <dialog class="popup popup_overlay-opacity_middle popup_type_form-img">
+    <div class="popup__form-group popup-wnd">
+      <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
+      <h2 class="popup__form-header">Новое место</h2>
+      <form class="popup__form">
+        <fieldset class="popup__inputs">
+          <input type="text" class="popup__input popup__input_item_naming" placeholder="Название"
+            id="edit-view__img-name" name="edit-view__img-name" required>
+          <input type="text" class="popup__input popup__input_item_input2" placeholder="Ссылка на картинку"
+            id="edit-view__img-link" name="edit-view__img-link" required>
         </fieldset>
         <button type="submit" class="popup__save-btn">Сохранить</button>
       </form>
