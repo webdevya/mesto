@@ -1,6 +1,6 @@
 
 
-const elementsUl = document.querySelector('.elements__cards');
+const _cardsContainer = document.querySelector('.elements__cards');
 const _profileFormClass = '.popup_type_form-profile';
 const _imgFormClass = '.popup_type_form-img';
 
@@ -10,15 +10,27 @@ function closePopup() {
 
   const popups = document.querySelectorAll('.popup');
 
-  for (let i = 0; i < popups.length; i++) {
-    if (popups[i].classList.contains('popup_opened')) {
-      popups[i].classList.remove('popup_opened');
+  for (let popup of popups) {
+    if (popup.classList.contains('popup_opened')) {
+      popup.classList.remove('popup_opened');
     }
   }
 
   submitCallBack = null;
 }
 
+
+function closeByOverlayClick(evt) {
+  if (evt.currentTarget === evt.target) {
+    closePopup();
+  }
+}
+
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    closePopup();
+  }
+}
 
 function handleFormSubmit(evt) {
 
@@ -43,34 +55,10 @@ function profileSubmitCallBack() {
 
 function addCardSubmitCallBack() {
   const frm = getFormInputs(_imgFormClass);
-  addCard(frm.input1.value, frm.input2.value);
-}
-
-function toggleFavState(evt) {
-  evt.preventDefault();
-  const btn = evt.currentTarget;
-  btn.classList.toggle('elements__card-fav-btn_state_checked');
+  addCard(frm.input1.value, frm.input2.value, _cardsContainer);
 }
 
 
-function openPopupImg(evt) {
-  evt.preventDefault();
-
-  const img = evt.currentTarget;
-  const caption = img.getAttribute('alt');
-  const src = img.getAttribute('src');
-
-  const popup = document.querySelector('.popup_type_img');
-
-  const imgPopup = popup.querySelector('.popup__image');
-  imgPopup.setAttribute('alt', caption);
-  imgPopup.setAttribute('src', src);
-
-  const imgCaption = popup.querySelector('.popup__image-caption-text');
-  imgCaption.textContent = caption;
-
-  popup.classList.add('popup_opened');
-}
 
 function getFormInputs(formClass) {
   const popup = document.querySelector(formClass);
@@ -98,6 +86,25 @@ function getProfileElements() {
   return res;
 }
 
+function openPopupImg(evt) {
+  evt.preventDefault();
+
+  const img = evt.currentTarget;
+  const caption = img.getAttribute('alt');
+  const src = img.getAttribute('src');
+
+  const popup = document.querySelector('.popup_type_img');
+
+  const imgPopup = popup.querySelector('.popup__image');
+  imgPopup.setAttribute('alt', caption);
+  imgPopup.setAttribute('src', src);
+
+  const imgCaption = popup.querySelector('.popup__image-caption-text');
+  imgCaption.textContent = caption;
+
+  popup.classList.add('popup_opened');
+}
+
 function openPopupForm(formClass, input1, input2) {
 
   const frm = getFormInputs(formClass);
@@ -123,54 +130,44 @@ function openPopupAddCard(evt) {
   openPopupForm(_imgFormClass, '', '');
 }
 
+function toggleFavState(evt) {
+  evt.preventDefault();
+  const btn = evt.currentTarget;
+  btn.classList.toggle('elements__card-fav-btn_state_checked');
+}
+
 
 function removeCard(evt) {
-  evt.preventDefault();
-  let el = evt.currentTarget;
-  let resume = true;
-  while (resume) {
-    if (!el.classList.contains('elements__card')) {
-      el = el.parentElement;
-    }
-    else {
-      resume = false;
-      el.remove();
-    }
-  }
+  const el = evt.currentTarget;
+  const card = el.closest('.elements__card');
+  card.remove();
 }
 
-function closeByOverlayClick(evt) {
-  if (evt.currentTarget === evt.target) {
-    closePopup();
-  }
-}
 
-function closeByEsc(evt) {
-  if (evt.key === "Escape") {
-    closePopup();
-  }
-}
+function createCard(caption, link) {
+  const cardTemplate = document.querySelector('.elements__card-template').content;
+  const card = cardTemplate.querySelector('.elements__card').cloneNode(true);
+  const img = card.querySelector('.elements__card-image');
+  img.src = link;
+  img.alt = caption;
+  card.querySelector('.elements__card-caption-text').textContent = caption;
 
-function addCard(caption, link) {
-  let cardHtml = `<li class="elements__card">
-<figure class="elements__card-figure">
-  <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
-  <img class="elements__card-image" src="${link}" alt="${caption}">
-  <figcaption class="elements__card-caption">
-    <h2 class="elements__card-caption-text">${caption}</h2>
-    <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
-  </figcaption>
-</figure>
-</li>`;
-  elementsUl.insertAdjacentHTML("afterbegin", cardHtml);
-
-  let btnFav = elementsUl.querySelector('.elements__card-fav-btn');
-  let btnTrash = elementsUl.querySelector('.elements__card-trash-btn');
-  let img = elementsUl.querySelector('.elements__card-image');
-  subscribeFav(btnFav);
-  subscribeTrash(btnTrash);
   subscribeOpenImg(img);
+
+  const btnFav = card.querySelector('.elements__card-fav-btn');
+  subscribeFav(btnFav);
+
+  const btnTrash = card.querySelector('.elements__card-trash-btn');
+  subscribeTrash(btnTrash);
+
+  return card;
 }
+
+function addCard(caption, link, cardsContainer) {
+  const card = createCard(caption, link);
+  cardsContainer.prepend(card);
+}
+
 
 function initStartCards() {
   const initialCards = [
@@ -202,19 +199,11 @@ function initStartCards() {
 
 
   for (let i = initialCards.length - 1; i >= 0; i--) {
-    addCard(initialCards[i].name, initialCards[i].link);
+    addCard(initialCards[i].name, initialCards[i].link, _cardsContainer);
   }
 
 }
 
-
-// function subscribeFavs() {
-//   const btns = document.querySelectorAll('.elements__card-fav-btn');
-//   for (let i = 0; i < btns.length; i++) {
-//     let btn = btns[i];
-//     subscribeFav(btn);
-//   }
-// }
 
 function subscribeFav(btnFav) {
   btnFav.addEventListener('click', toggleFavState);
@@ -227,23 +216,6 @@ function subscribeTrash(btnTrash) {
 function subscribeOpenImg(img) {
   img.addEventListener('click', openPopupImg);
 }
-
-// function subscribeOpenImgs() {
-//   const imgs = document.querySelectorAll('.elements__card-image');
-//   for (let i = 0; i < imgs.length; i++) {
-//     let img = imgs[i];
-//     subscribeOpenImg(img);
-//   }
-// }
-
-
-// function subscribeTrashes() {
-//   const btns = document.querySelectorAll('.elements__card-trash-btn');
-//   for (let i = 0; i < btns.length; i++) {
-//     let btn = btns[i];
-//     subscribeTrash(btn);
-//   }
-// }
 
 
 function subscribeCloseEditView() {
@@ -274,10 +246,6 @@ function subscribeAllByClass(className, event, func) {
     elements[i].addEventListener(event, func);
   }
 }
-
-// subscribeFavs();
-// subscribeTrashes();
-// subscribeOpenImgs()
 
 
 subscribeOpenEditProfileView();

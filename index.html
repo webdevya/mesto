@@ -27,66 +27,6 @@
     </section>
     <section class="elements" aria-label="Места путешествий">
       <ul class="elements__cards">
-        <li class="elements__card">
-          <figure class="elements__card-figure">
-            <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
-            <img class="elements__card-image" src="./images/card-karachaevsk.jpg" alt="Карачаевск">
-            <figcaption class="elements__card-caption">
-              <h2 class="elements__card-caption-text">Карачаевск</h2>
-              <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="elements__card">
-          <figure class="elements__card-figure">
-            <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
-            <img class="elements__card-image" src="./images/card-elbrus.jpg" alt="Гора Эльбрус">
-            <figcaption class="elements__card-caption">
-              <h2 class="elements__card-caption-text">Гора Эльбрус</h2>
-              <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="elements__card">
-          <figure class="elements__card-figure">
-            <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
-            <img class="elements__card-image" src="./images/card-dombay.jpg" alt="Домбай">
-            <figcaption class="elements__card-caption">
-              <h2 class="elements__card-caption-text">Домбай</h2>
-              <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="elements__card">
-          <figure class="elements__card-figure">
-            <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
-            <img class="elements__card-image" src="./images/card-elbrus.jpg" alt="Гора Эльбрус">
-            <figcaption class="elements__card-caption">
-              <h2 class="elements__card-caption-text">Гора Эльбрус</h2>
-              <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="elements__card">
-          <figure class="elements__card-figure">
-            <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
-            <img class="elements__card-image" src="./images/card-dombay.jpg" alt="Домбай">
-            <figcaption class="elements__card-caption">
-              <h2 class="elements__card-caption-text">Домбай</h2>
-              <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="elements__card">
-          <figure class="elements__card-figure">
-            <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
-            <img class="elements__card-image" src="./images/card-karachaevsk.jpg" alt="Карачаевск">
-            <figcaption class="elements__card-caption">
-              <h2 class="elements__card-caption-text">Карачаево-Черкессия</h2>
-              <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
-            </figcaption>
-          </figure>
-        </li>
       </ul>
     </section>
   </main>
@@ -134,6 +74,18 @@
       </figure>
     </div>
   </dialog>
+  <template class="elements__card-template">
+    <li class="elements__card">
+      <figure class="elements__card-figure">
+        <button type="button" class="elements__card-trash-btn image-btn image-btn_hover-opacity_medium"></button>
+        <img class="elements__card-image">
+        <figcaption class="elements__card-caption">
+          <h2 class="elements__card-caption-text"></h2>
+          <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
+        </figcaption>
+      </figure>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 
