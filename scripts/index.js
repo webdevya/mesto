@@ -1,6 +1,6 @@
-
-
 const _cardsContainer = document.querySelector('.elements__cards');
+const _profile = document.querySelector('.profile');
+
 const _profileFormClass = '.popup_type_form-profile';
 const _imgFormClass = '.popup_type_form-img';
 
@@ -75,9 +75,9 @@ function getFormInputs(formClass) {
 }
 
 function getProfileElements() {
-  const profile = document.querySelector('.profile');
-  const nameProfile = profile.querySelector('.profile__name');
-  const aboutProfile = profile.querySelector('.profile__about');
+
+  const nameProfile = _profile.querySelector('.profile__name');
+  const aboutProfile = _profile.querySelector('.profile__about');
 
   const res = new Object();
   res.name = nameProfile;
@@ -242,8 +242,8 @@ function subscribeSubmit() {
 
 function subscribeAllByClass(className, event, func) {
   const elements = document.querySelectorAll(className);
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].addEventListener(event, func);
+  for (let element of elements) {
+    element.addEventListener(event, func);
   }
 }
 
