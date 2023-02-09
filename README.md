@@ -5,8 +5,9 @@
 * верстка с использованием технологий адаптивности под разные размеры устройств
 * обработка поведения (нажатие на кнопки, работа с формами)
 
-Использованы технологии html5 + css + js. Сверстан на основе макета из фигмы:
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+Использованы технологии html5 + css + js. Сверстан на основе макетов из фигмы:
+* [Ссылка на первый макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Ссылка на второй макет в Figma](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1&t=Ju2OEGposCLfLhT6-0)
 
 Для расположения элементов по сетке использован комбинированный подход grid + flex. Расположение файлов (в т.ч. js) основано на nested БЭМ
 
