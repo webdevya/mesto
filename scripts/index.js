@@ -1,22 +1,28 @@
 const _cardsContainer = document.querySelector('.elements__cards');
 const _profile = document.querySelector('.profile');
 
+const _popupProfile = document.querySelector('.popup_type_form-profile');
+const _popupAddCard = document.querySelector('.popup_type_form-img');
+const _popupViewImg = document.querySelector('.popup_type_img');
 const _profileFormClass = '.popup_type_form-profile';
 const _imgFormClass = '.popup_type_form-img';
 
 let submitCallBack = null;
+let currentPopup = null;
 
 function closePopup() {
 
-  const popups = document.querySelectorAll('.popup');
+  // const popups = document.querySelectorAll('.popup');
 
-  for (let popup of popups) {
-    if (popup.classList.contains('popup_opened')) {
-      popup.classList.remove('popup_opened');
-    }
+  // for (let popup of popups) {
+  const popup = currentPopup;
+  if (popup !== null && popup.classList.contains('popup_opened')) {
+    popup.classList.remove('popup_opened');
   }
+  //}
 
   submitCallBack = null;
+  currentPopup = null;
 }
 
 
@@ -101,6 +107,7 @@ function openPopupImg(evt) {
 
   const imgCaption = popup.querySelector('.popup__image-caption-text');
   imgCaption.textContent = caption;
+  currentPopup = _popupViewImg;
 
   popup.classList.add('popup_opened');
 }
@@ -118,6 +125,7 @@ function openPopupProfile(evt) {
   const profile = getProfileElements();
 
   submitCallBack = profileSubmitCallBack;
+  currentPopup = _popupProfile;
 
   openPopupForm(_profileFormClass, profile.name.textContent, profile.about.textContent);
 
@@ -126,6 +134,7 @@ function openPopupProfile(evt) {
 function openPopupAddCard(evt) {
 
   submitCallBack = addCardSubmitCallBack;
+  currentPopup = _popupAddCard;
 
   openPopupForm(_imgFormClass, '', '');
 }
