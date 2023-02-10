@@ -4,6 +4,8 @@ const _cardsContainer = document.querySelector('.elements__cards');
 const _profile = document.querySelector('.profile');
 const _profileName = _profile.querySelector('.profile__name');
 const _profileAbout = _profile.querySelector('.profile__about');
+const _profileBtnEdit = document.querySelector('.profile__edit-btn');
+const _profileBtnAddCard = document.querySelector('.profile__add-card');
 const _popupProfile = document.querySelector('.popup_type_form-profile');
 const _popupAddCard = document.querySelector('.popup_type_form-img');
 const _popupViewImg = document.querySelector('.popup_type_img');
@@ -202,14 +204,12 @@ function addCard(cardProperties, cardsContainer) {
   cardsContainer.prepend(card);
 }
 
-
 function initStartCards(initialCards) {
 
   for (let i = initialCards.length - 1; i >= 0; i--) {
     addCard(initialCards[i], _cardsContainer);
   }
 }
-
 
 function subscribeFav(btnFav) {
   btnFav.addEventListener('click', toggleFavState);
@@ -223,29 +223,6 @@ function subscribeOpenImg(img) {
   img.addEventListener('click', openPopupImg);
 }
 
-
-function subscribeCloseEditView() {
-  subscribeAllByClass('.popup__close-btn', 'click', closePopup);
-}
-
-function subscribeOpenEditProfileView() {
-  const btnEdit = document.querySelector('.profile__edit-btn');
-  btnEdit.addEventListener('click', openPopupProfile);
-}
-
-function subscribeOpenAddCardView() {
-  const btnEdit = document.querySelector('.profile__add-card');
-  btnEdit.addEventListener('click', openPopupAddCard);
-}
-
-function subscribeCloseByOverlay() {
-  subscribeAllByClass('.popup', 'click', closeByOverlayClick);
-}
-
-function subscribeSubmit() {
-  subscribeAllByClass('.popup__form', 'submit', handleFormSubmit);
-}
-
 function subscribeAllByClass(className, event, func) {
   const elements = document.querySelectorAll(className);
   for (let element of elements) {
@@ -253,13 +230,11 @@ function subscribeAllByClass(className, event, func) {
   }
 }
 
-
-subscribeOpenEditProfileView();
-subscribeOpenAddCardView();
-subscribeCloseEditView();
-subscribeCloseByOverlay();
-subscribeSubmit();
-
 document.addEventListener('keydown', closeByEsc);
+_profileBtnEdit.addEventListener('click', openPopupProfile);
+_profileBtnAddCard.addEventListener('click', openPopupAddCard);
+subscribeAllByClass('.popup__close-btn', 'click', closePopup);
+subscribeAllByClass('.popup', 'click', closeByOverlayClick);
+subscribeAllByClass('.popup__form', 'submit', handleFormSubmit);
 
 initStartCards(_initialCards);
