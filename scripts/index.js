@@ -11,7 +11,7 @@ const _popupAddCard = document.querySelector('.popup_type_form-img');
 const _popupViewImg = document.querySelector('.popup_type_img');
 const _popupViewImgImage = _popupViewImg.querySelector('.popup__image');
 const _popupViewImgCaption = _popupViewImg.querySelector('.popup__image-caption-text');
-const cardTemplate = document.querySelector('.elements__card-template').content.querySelector('.elements__card');
+const cardTemplate = document.querySelector('.elements-card-template').content.querySelector('.elements__card');
 
 
 
