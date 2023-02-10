@@ -15,11 +15,34 @@ const cardTemplate = document.querySelector('.elements__card-template').content.
 
 
 
-//names constatnts
+//input names constatnts
 const _popupProfileNameAttrName = 'profile-name';
 const _popupProfileAboutAttrName = 'profile-about';
 const _popupAddCardNameAttrName = 'img-name';
 const _popupAddCardLinkAttrName = 'img-link';
+
+//match input names to domElements
+const _profileInputsToElementsMap = [
+  {
+    inputName: _popupProfileNameAttrName,
+    elementItem: _profileName
+  },
+  {
+    inputName: _popupProfileAboutAttrName,
+    elementItem: _profileAbout
+  }
+];
+
+const _cardInputsToElementsMap = [
+  {
+    inputName: _popupAddCardNameAttrName,
+    elementItem: null
+  },
+  {
+    inputName: _popupAddCardLinkAttrName,
+    elementItem: null
+  }
+];
 
 //popup variables
 let submitCallBack = null;
@@ -62,15 +85,25 @@ function profileSubmitCallBack() {
 
   const inputs = getFormInputs(_popupProfile);
 
-  let input = inputs.find(inp => inp.name === _popupProfileNameAttrName);
-  if (input !== null)
-    _profileName.textContent = input.inputElement.value;
-
-  input = inputs.find(inp => inp.name === _popupProfileAboutAttrName);
-  if (input !== null)
-    _profileAbout.textContent = input.inputElement.value;
+  fillContentFromInputs(inputs, _profileInputsToElementsMap);
 }
 
+function fillContentFromInputs(inputs, propertiesMatch) {
+  propertiesMatch.forEach(match => {
+    let input = inputs.find(inp => inp.name === match.inputName);
+    if (input !== null)
+      if (match.elementItem !== null)
+        match.elementItem.textContent = input.inputElement.value;
+  });
+}
+
+function fillInputsFromContent(inputs, propertiesMatch) {
+  propertiesMatch.forEach(match => {
+    let input = inputs.find(inp => inp.name === match.inputName);
+    if (input !== null)
+      input.inputElement.value = match.elementItem !== null ? match.elementItem.textContent : '';
+  });
+}
 
 function addCardSubmitCallBack() {
   const inputs = getFormInputs(_popupAddCard);
@@ -133,23 +166,11 @@ function openPopupForm(popup, inputsFiller) {
 }
 
 function FillProfileInputs(inputs) {
-  let input = inputs.find(inp => inp.name === _popupProfileNameAttrName);
-  if (input !== null)
-    input.inputElement.value = _profileName.textContent;
-
-  input = inputs.find(inp => inp.name === _popupProfileAboutAttrName);
-  if (input !== null)
-    input.inputElement.value = _profileAbout.textContent;
+  fillInputsFromContent(inputs, _profileInputsToElementsMap);
 }
 
 function FillAddCardInputs(inputs) {
-  let input = inputs.find(inp => inp.name === _popupAddCardNameAttrName);
-  if (input !== null)
-    input.inputElement.value = '';
-
-  input = inputs.find(inp => inp.name === _popupAddCardLinkAttrName);
-  if (input !== null)
-    input.inputElement.value = '';
+  fillInputsFromContent(inputs, _cardInputsToElementsMap);
 }
 
 function openPopupProfile(evt) {
