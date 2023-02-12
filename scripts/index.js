@@ -90,7 +90,7 @@ function profileSubmitCallBack() {
 
 function fillContentFromInputs(inputs, propertiesMatch) {
   propertiesMatch.forEach(match => {
-    let input = inputs.find(inp => inp.name === match.inputName);
+    const input = inputs.find(inp => inp.name === match.inputName);
     if (input !== null)
       if (match.elementItem !== null)
         match.elementItem.textContent = input.inputElement.value;
@@ -99,7 +99,7 @@ function fillContentFromInputs(inputs, propertiesMatch) {
 
 function fillInputsFromContent(inputs, propertiesMatch) {
   propertiesMatch.forEach(match => {
-    let input = inputs.find(inp => inp.name === match.inputName);
+    const input = inputs.find(inp => inp.name === match.inputName);
     if (input !== null)
       input.inputElement.value = match.elementItem !== null ? match.elementItem.textContent : '';
   });
@@ -147,11 +147,11 @@ function openPopupImg(evt) {
 
   _popupViewImgCaption.textContent = caption;
 
-  OpenPopup(_popupViewImg);
+  openPopup(_popupViewImg);
 
 }
 
-function OpenPopup(popup) {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
   currentPopup = popup;
 }
@@ -162,14 +162,14 @@ function openPopupForm(popup, inputsFiller) {
 
   inputsFiller(inputs)
 
-  OpenPopup(popup);
+  openPopup(popup);
 }
 
-function FillProfileInputs(inputs) {
+function fillProfileInputs(inputs) {
   fillInputsFromContent(inputs, _profileInputsToElementsMap);
 }
 
-function FillAddCardInputs(inputs) {
+function fillAddCardInputs(inputs) {
   fillInputsFromContent(inputs, _cardInputsToElementsMap);
 }
 
@@ -177,14 +177,14 @@ function openPopupProfile(evt) {
 
   submitCallBack = profileSubmitCallBack;
 
-  openPopupForm(_popupProfile, FillProfileInputs);
+  openPopupForm(_popupProfile, fillProfileInputs);
 }
 
 function openPopupAddCard(evt) {
 
   submitCallBack = addCardSubmitCallBack;
 
-  openPopupForm(_popupAddCard, FillAddCardInputs);
+  openPopupForm(_popupAddCard, fillAddCardInputs);
 }
 
 function toggleFavState(evt) {
