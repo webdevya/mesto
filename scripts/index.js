@@ -255,7 +255,7 @@ document.addEventListener('keydown', closeByEsc);
 _profileBtnEdit.addEventListener('click', openPopupProfile);
 _profileBtnAddCard.addEventListener('click', openPopupAddCard);
 subscribeAllByClass('.popup__close-btn', 'click', closePopup);
-subscribeAllByClass('.popup', 'click', closeByOverlayClick);
+subscribeAllByClass('.popup', 'mousedown', closeByOverlayClick);
 subscribeAllByClass('.popup__form', 'submit', handleFormSubmit);
 
 initStartCards(_initialCards);
