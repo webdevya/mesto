@@ -60,7 +60,7 @@ function closePopup() {
 }
 
 function closeByOverlayClick(evt) {
-  if (evt.currentTarget === evt.target) {
+  if (evt.currentTarget === evt.target && evt.button === 0) {
     closePopup();
   }
 }
