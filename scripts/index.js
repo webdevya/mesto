@@ -53,6 +53,7 @@ function closePopup() {
   const popup = currentPopup;
   if (popup !== null && popup.classList.contains('popup_opened')) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEsc);
   }
 
   submitCallBack = null;
@@ -154,6 +155,7 @@ function openPopupImg(evt) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   currentPopup = popup;
+  document.addEventListener('keydown', closeByEsc);
 }
 
 function openPopupForm(popup, inputsFiller) {
@@ -251,7 +253,7 @@ function subscribeAllByClass(className, event, func) {
   }
 }
 
-document.addEventListener('keydown', closeByEsc);
+
 _profileBtnEdit.addEventListener('click', openPopupProfile);
 _profileBtnAddCard.addEventListener('click', openPopupAddCard);
 subscribeAllByClass('.popup__close-btn', 'click', closePopup);
