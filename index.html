@@ -37,12 +37,18 @@
     <div class="popup__form-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
       <h2 class="popup__form-header">Редактировать профиль</h2>
-      <form class="popup__form">
+      <form class="popup__form" name="form-edit-profile" novalidate>
         <fieldset class="popup__inputs">
-          <input type="text" class="popup__input popup__input_item_naming" placeholder="Имя"
-            id="edit-view__profile-name" name="profile-name" required>
-          <input type="text" class="popup__input popup__input_item_input2" placeholder="О себе"
-            id="edit-view__profile-about" name="profile-about" required>
+          <label for="popup__profile-name" class="popup__field">
+            <input type="text" class="popup__input" placeholder="Имя" id="profile-name-input" name="profile-name"
+              required minlength="2" maxlength="40">
+            <span class="popup__error profile-name-input-error"></span>
+          </label>
+          <label for="edit-view__profile-about" class="popup__field">
+            <input type="text" class="popup__input" placeholder="О себе" id="profile-about-input" name="profile-about"
+              required minlength="2" maxlength="200">
+            <span class="popup__error profile-about-input-error"></span>
+          </label>
         </fieldset>
         <button type="submit" class="popup__save-btn">Сохранить</button>
       </form>
@@ -52,12 +58,18 @@
     <div class="popup__form-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
       <h2 class="popup__form-header">Новое место</h2>
-      <form class="popup__form">
+      <form class="popup__form" name="form-new-card" novalidate>
         <fieldset class="popup__inputs">
-          <input type="text" class="popup__input popup__input_item_naming" placeholder="Название"
-            id="edit-view__img-name" name="img-name" required>
-          <input type="text" class="popup__input popup__input_item_input2" placeholder="Ссылка на картинку"
-            id="edit-view__img-link" name="img-link" required>
+          <label for="edit-view__img-name" class="popup__field">
+            <input type="text" class="popup__input" placeholder="Название" id="img-name-input" name="img-name" required
+              minlength="2" maxlength="30">
+            <span class="popup__error img-name-input-error"></span>
+          </label>
+          <label for="edit-view__img-link" class="popup__field">
+            <input type="url" class="popup__input" placeholder="Ссылка на картинку" id="img-link-input" name="img-link"
+              required>
+            <span class="popup__error img-link-input-error"></span>
+          </label>
         </fieldset>
         <button type="submit" class="popup__save-btn">Сохранить</button>
       </form>
@@ -86,6 +98,7 @@
       </figure>
     </li>
   </template>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/constants/cards.js"></script>
   <script src="./scripts/index.js"></script>
 

@@ -54,6 +54,7 @@ function closePopup() {
   if (popup !== null && popup.classList.contains('popup_opened')) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeByEsc);
+    disableValidation();
   }
 
   submitCallBack = null;
@@ -163,6 +164,14 @@ function openPopupForm(popup, inputsFiller) {
   const inputs = getFormInputs(popup);
 
   inputsFiller(inputs)
+  enableValidation({
+    formName: popup.querySelector('.popup__form').name,
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-btn',
+    inactiveButtonClass: 'popup__save-btn_disabled',
+    inputErrorClass: 'popup__input_type_error',
+
+  });
 
   openPopup(popup);
 }
