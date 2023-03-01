@@ -1,34 +1,21 @@
-let form = null;
-let inputList = null;
-let submitButtonElement = null;
-let submitDisableClassName = null;
-let inputErrorClassName = null;
 
 function hasInvalidInput(inputList) {
   return inputList.some(input => !input.validity.valid);
 }
 
 function toggleButtonState(inputList, buttonElement, submitDisableClass) {
-  if (hasInvalidInput(inputList))
+
+  buttonElement.disabled = hasInvalidInput(inputList);
+  if (buttonElement.disabled) {
     buttonElement.classList.add(submitDisableClass);
-  else
+  }
+  else {
     buttonElement.classList.remove(submitDisableClass);
+  }
 }
 
 function checkInputValidity(formElement, inputElement, inputErrorClass) {
   toggleInputError(formElement, inputElement, inputErrorClass, inputElement.validationMessage);
-}
-
-function toggleInputSubscription(inputList, isSubscribe) {
-
-  inputList.forEach((inputElement) => {
-    if (isSubscribe) {
-      inputElement.addEventListener('input', handleInput);
-    }
-    else {
-      inputElement.removeEventListener('input', handleInput);
-    }
-  });
 }
 
 function toggleInputError(formElement, inputElement, inputErrorClass, errorMessage) {
@@ -41,27 +28,26 @@ function toggleInputError(formElement, inputElement, inputErrorClass, errorMessa
   errorElement.textContent = errorMessage;
 }
 
-function handleInput(evt) {
-  checkInputValidity(form, evt.currentTarget, inputErrorClassName);
-  toggleButtonState(inputList, submitButtonElement, submitDisableClassName);
-}
-
 
 function enableValidation(config) {
-  form = document.forms[config.formName];
-  if (form !== null) {
+  const forms = Array.from(document.querySelectorAll(config.formSelector));
+  forms.forEach(form => {
     inputList = Array.from(form.querySelectorAll(config.inputSelector));
     submitButtonElement = form.querySelector(config.submitButtonSelector);
-    submitDisableClassName = config.inactiveButtonClass;
-    inputErrorClassName = config.inputErrorClass;
-
-    toggleInputSubscription(inputList, true);
-    toggleButtonState(inputList, submitButtonElement, submitDisableClassName);
-  }
+    subscribeInputs(form, inputList, submitButtonElement, config.inputErrorClass, config.submitDisableClass)
+    toggleButtonState(inputList, submitButtonElement, config.submitDisableClassName);
+  });
 }
 
-function disableValidation() {
-  if (inputList !== null)
-    toggleInputSubscription(inputList, false);
+function subscribeInputs(formElement, inputList, submitButtonElement, inputErrorClass, submitDisableClass) {
+
+  inputList.forEach((inputElement) => {
+
+    inputElement.addEventListener('input', (evt) => {
+      checkInputValidity(formElement, inputElement, inputErrorClass);
+      toggleButtonState(inputList, submitButtonElement, submitDisableClass);
+
+    });
+  });
 }
 
