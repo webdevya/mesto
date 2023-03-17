@@ -37,7 +37,7 @@
     <div class="popup__form-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
       <h2 class="popup__form-header">Редактировать профиль</h2>
-      <form class="popup__form" name="form-edit-profile" novalidate>
+      <form class="popup__view popup__form" name="form-edit-profile" novalidate>
         <fieldset class="popup__inputs">
           <label for="profile-name-input" class="popup__field">
             <input type="text" class="popup__input" placeholder="Имя" id="profile-name-input" name="profile-name"
@@ -58,7 +58,7 @@
     <div class="popup__form-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
       <h2 class="popup__form-header">Новое место</h2>
-      <form class="popup__form" name="form-new-card" novalidate>
+      <form class="popup__view popup__form" name="form-new-card" novalidate>
         <fieldset class="popup__inputs">
           <label for="img-name-input" class="popup__field">
             <input type="text" class="popup__input" placeholder="Название" id="img-name-input" name="img-name" required
@@ -78,7 +78,7 @@
   <dialog class="popup popup_overlay-opacity_high popup_type_img">
     <div class="popup__image-group popup-wnd">
       <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
-      <figure class="popup__form">
+      <figure class="popup__view">
         <img class="popup__image" src="#" alt="Описание">
         <figcaption class="popup__image-caption">
           <h2 class="popup__image-caption-text">Описание</h2>
@@ -98,9 +98,14 @@
       </figure>
     </li>
   </template>
-  <script src="./scripts/validate.js"></script>
+  <script src="./scripts/utils.js"></script>
   <script src="./scripts/constants/cards.js"></script>
-  <script src="./scripts/index.js"></script>
+  <script src="./scripts/constants/cardSelectors.js"></script>
+  <script src="./scripts/constants/formConstants.js"></script>
+  <script src="./scripts/constants/inputsConstants.js"></script>
+  <script type="module" src="./scripts/FormValidator.js"></script>
+  <script type="module" src="./scripts/Card.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
 
 </body>
 

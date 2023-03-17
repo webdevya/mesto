@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 
 //DOM elements
 const _cardsContainer = document.querySelector('.elements__cards');
@@ -12,8 +15,6 @@ const _popupViewImg = document.querySelector('.popup_type_img');
 const _popupViewImgImage = _popupViewImg.querySelector('.popup__image');
 const _popupViewImgCaption = _popupViewImg.querySelector('.popup__image-caption-text');
 const cardTemplate = document.querySelector('.elements-card-template').content.querySelector('.elements__card');
-
-
 
 //input names constatnts
 const _popupProfileNameAttrName = 'profile-name';
@@ -44,6 +45,8 @@ const _cardInputsToElementsMap = [
   }
 ];
 
+
+
 //popup variables
 let submitCallBack = null;
 let currentPopup = null;
@@ -54,6 +57,7 @@ function closePopup() {
   if (popup !== null && popup.classList.contains('popup_opened')) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeByEsc);
+    popup.querySelector(formSelector)?.reset();
   }
 
   submitCallBack = null;
@@ -89,22 +93,7 @@ function profileSubmitCallBack() {
   fillContentFromInputs(inputs, _profileInputsToElementsMap);
 }
 
-function fillContentFromInputs(inputs, propertiesMatch) {
-  propertiesMatch.forEach(match => {
-    const input = inputs.find(inp => inp.name === match.inputName);
-    if (input !== null)
-      if (match.elementItem !== null)
-        match.elementItem.textContent = input.inputElement.value;
-  });
-}
 
-function fillInputsFromContent(inputs, propertiesMatch) {
-  propertiesMatch.forEach(match => {
-    const input = inputs.find(inp => inp.name === match.inputName);
-    if (input !== null)
-      input.inputElement.value = match.elementItem !== null ? match.elementItem.textContent : '';
-  });
-}
 
 function addCardSubmitCallBack() {
   const inputs = getFormInputs(_popupAddCard);
@@ -119,20 +108,6 @@ function addCardSubmitCallBack() {
   );
 
   addCard(cardData, _cardsContainer);
-}
-
-
-
-function getFormInputs(popup) {
-
-  const res = [];
-
-  const inputs = popup.querySelectorAll('.popup__input');
-  for (let input of inputs) {
-    res.push({ name: input.getAttribute('name'), inputElement: input })
-  }
-
-  return res;
 }
 
 
@@ -203,53 +178,26 @@ function removeCard(evt) {
 }
 
 
-function createCard(caption, link) {
-  const card = cardTemplate.cloneNode(true);
-  const img = card.querySelector('.elements__card-image');
-  img.src = link;
-  img.alt = caption;
-  card.querySelector('.elements__card-caption-text').textContent = caption;
-
-  subscribeOpenImg(img);
-
-  const btnFav = card.querySelector('.elements__card-fav-btn');
-  subscribeFav(btnFav);
-
-  const btnTrash = card.querySelector('.elements__card-trash-btn');
-  subscribeTrash(btnTrash);
-
-  return card;
-}
-
 function addCard(cardProperties, cardsContainer) {
 
-  const card = createCard(cardProperties.name, cardProperties.link);
-  cardsContainer.prepend(card);
+  const card = new Card(
+    {
+      link: cardProperties.link,
+      caption: cardProperties.name,
+      openImagePopupHandler: openPopupImg,
+      favHandler: toggleFavState,
+      trashHandler: removeCard,
+      cardSelectors: cardSelectors
+    },
+    cardTemplate
+  );
+  cardsContainer.prepend(card.createCard());
 }
 
 function initStartCards(initialCards) {
 
   for (let i = initialCards.length - 1; i >= 0; i--) {
     addCard(initialCards[i], _cardsContainer);
-  }
-}
-
-function subscribeFav(btnFav) {
-  btnFav.addEventListener('click', toggleFavState);
-}
-
-function subscribeTrash(btnTrash) {
-  btnTrash.addEventListener('click', removeCard);
-}
-
-function subscribeOpenImg(img) {
-  img.addEventListener('click', openPopupImg);
-}
-
-function subscribeAllByClass(className, event, func) {
-  const elements = document.querySelectorAll(className);
-  for (let element of elements) {
-    element.addEventListener(event, func);
   }
 }
 
@@ -262,11 +210,11 @@ subscribeAllByClass('.popup__form', 'submit', handleFormSubmit);
 
 initStartCards(_initialCards);
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-btn',
-  submitDisableClass: 'popup__save-btn_disabled',
-  inputErrorClass: 'popup__input_type_error',
-
+Array.from(document.querySelectorAll(formSelector)).forEach(form => {
+  let validator = new FormValidator(formConstants, form);
+  validator.enableValidation();
 });
+
+
+
+
