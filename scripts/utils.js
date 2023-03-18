@@ -15,9 +15,7 @@ function fillInputsFromContent(inputs, propertiesMatch) {
   });
 }
 
-
 function getFormInputs(popup) {
-
   const res = [];
 
   const inputs = popup.querySelectorAll('.popup__input');
@@ -27,8 +25,6 @@ function getFormInputs(popup) {
 
   return res;
 }
-
-
 
 function subscribeAllByClass(className, event, func) {
   const elements = document.querySelectorAll(className);

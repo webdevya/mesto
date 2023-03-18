@@ -9,7 +9,6 @@ class Card {
     this._cardSelectors = data.cardSelectors;
   }
 
-
   _subscribeFav(card) {
     const btnFav = card.querySelector(this._cardSelectors.favBtnSelector);//('.elements__card-fav-btn');
     btnFav.addEventListener('click', this._favHandler);
@@ -37,17 +36,12 @@ class Card {
     return { card, img };
   }
 
-
   createCard() {
 
     const elements = this._getCardElements();
-
     this._fillProps(elements);
-
     this._subscribeOpenImg(elements.img);
-
     this._subscribeFav(elements.card);
-
     this._subscribeTrash(elements.card);
 
     return elements.card;

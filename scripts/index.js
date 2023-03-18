@@ -1,7 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
-
 //DOM elements
 const _cardsContainer = document.querySelector('.elements__cards');
 const _profile = document.querySelector('.profile');
@@ -45,12 +44,9 @@ const _cardInputsToElementsMap = [
   }
 ];
 
-
-
 //popup variables
 let submitCallBack = null;
 let currentPopup = null;
-
 
 function closePopup() {
   const popup = currentPopup;
@@ -93,8 +89,6 @@ function profileSubmitCallBack() {
   fillContentFromInputs(inputs, _profileInputsToElementsMap);
 }
 
-
-
 function addCardSubmitCallBack() {
   const inputs = getFormInputs(_popupAddCard);
 
@@ -110,7 +104,6 @@ function addCardSubmitCallBack() {
   addCard(cardData, _cardsContainer);
 }
 
-
 function openPopupImg(evt) {
   evt.preventDefault();
 
@@ -124,7 +117,6 @@ function openPopupImg(evt) {
   _popupViewImgCaption.textContent = caption;
 
   openPopup(_popupViewImg);
-
 }
 
 function openPopup(popup) {
@@ -136,9 +128,7 @@ function openPopup(popup) {
 function openPopupForm(popup, inputsFiller) {
 
   const inputs = getFormInputs(popup);
-
-  inputsFiller(inputs)
-
+  inputsFiller(inputs);
   openPopup(popup);
 }
 
@@ -153,14 +143,11 @@ function fillAddCardInputs(inputs) {
 function openPopupProfile(evt) {
 
   submitCallBack = profileSubmitCallBack;
-
   openPopupForm(_popupProfile, fillProfileInputs);
 }
 
 function openPopupAddCard(evt) {
-
   submitCallBack = addCardSubmitCallBack;
-
   openPopupForm(_popupAddCard, fillAddCardInputs);
 }
 
@@ -170,13 +157,11 @@ function toggleFavState(evt) {
   btn.classList.toggle('elements__card-fav-btn_state_checked');
 }
 
-
 function removeCard(evt) {
   const el = evt.currentTarget;
   const card = el.closest('.elements__card');
   card.remove();
 }
-
 
 function addCard(cardProperties, cardsContainer) {
 
@@ -195,12 +180,10 @@ function addCard(cardProperties, cardsContainer) {
 }
 
 function initStartCards(initialCards) {
-
   for (let i = initialCards.length - 1; i >= 0; i--) {
     addCard(initialCards[i], _cardsContainer);
   }
 }
-
 
 _profileBtnEdit.addEventListener('click', openPopupProfile);
 _profileBtnAddCard.addEventListener('click', openPopupAddCard);
@@ -211,7 +194,7 @@ subscribeAllByClass('.popup__form', 'submit', handleFormSubmit);
 initStartCards(_initialCards);
 
 Array.from(document.querySelectorAll(formSelector)).forEach(form => {
-  let validator = new FormValidator(formConstants, form);
+  const validator = new FormValidator(formConstants, form);
   validator.enableValidation();
 });
 

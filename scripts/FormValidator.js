@@ -8,7 +8,6 @@ class FormValidator {
     this._form = form;
   }
 
-
   _hasInvalidInput() {
     return !this._form.checkValidity();
   }
@@ -38,14 +37,11 @@ class FormValidator {
     errorElement.textContent = errorMessage;
   }
 
-
   enableValidation() {
-
     this._submitButtonElement = this._form.querySelector(this._submitButtonSelector);
     this._subscribeInputs(this._inputErrorClass, this._submitDisableClass);
-    this._subscribeReset(this._submitButtonElement, this._submitDisableClass, this._errorTextSelector);
+    this._subscribeReset(this._submitDisableClass, this._errorTextSelector);
     this._toggleButtonState(this._submitButtonElement, this._submitDisableClass, this._hasInvalidInput());
-
   }
 
   _subscribeReset(submitDisableClass, errorTextSelector) {
