@@ -1,21 +1,30 @@
 class Card {
-  constructor(data, cardTemplate) {
-    this._link = data.link;
-    this._caption = data.caption;
+  constructor(
+    { link, caption },
+    { favBtnSelector, trashBtnSelector, captionSelector, imageSelector },
+    cardTemplate,
+    { openImagePopupHandler, favHandler, trashHandler }) {
+    this._link = link;
+    this._caption = caption;
     this._cardTemplate = cardTemplate;
-    this._openImagePopupHandler = data.openImagePopupHandler;
-    this._favHandler = data.favHandler;
-    this._trashHandler = data.trashHandler;
-    this._cardSelectors = data.cardSelectors;
+    this._openImagePopupHandler = openImagePopupHandler;
+    this._favHandler = favHandler;
+    this._trashHandler = trashHandler;
+    this._cardSelectors = cardSelectors;
+    this._handleCardClick = handleCardClick;
+    this._favBtnSelector = favBtnSelector;
+    this._trashBtnSelector = trashBtnSelector;
+    this._captionSelector = captionSelector;
+    this._imageSelector = imageSelector;
   }
 
   _subscribeFav(card) {
-    const btnFav = card.querySelector(this._cardSelectors.favBtnSelector);//('.elements__card-fav-btn');
+    const btnFav = card.querySelector(this._favBtnSelector);
     btnFav.addEventListener('click', this._favHandler);
   }
 
   _subscribeTrash(card) {
-    const btnTrash = card.querySelector(this._cardSelectors.trashBtnSelector);//('.elements__card-trash-btn');
+    const btnTrash = card.querySelector(this._trashBtnSelector);
     btnTrash.addEventListener('click', this._trashHandler);
   }
 
@@ -26,12 +35,12 @@ class Card {
   _fillProps(cardElements) {
     cardElements.img.src = this._link;
     cardElements.img.alt = this._caption;
-    cardElements.card.querySelector(this._cardSelectors.captionSelector).textContent = this._caption;//('.elements__card-caption-text').textContent = this._caption;
+    cardElements.card.querySelector(this._captionSelector).textContent = this._caption;
   }
 
   _getCardElements() {
     const card = this._cardTemplate.cloneNode(true);
-    const img = card.querySelector(this._cardSelectors.imageSelector);//('.elements__card-image');
+    const img = card.querySelector(this._imageSelector);
 
     return { card, img };
   }
