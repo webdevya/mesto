@@ -38,9 +38,13 @@ const inputNameToCardAttrMap = [
   { inputName: 'img-link', cardAttr: 'link' }
 ];
 
+
+const profileNameSelector = '.profile__name';
+const profileAboutSelector = '.profile__about';
+
 const _profile = document.querySelector('.profile');
-const _profileName = _profile.querySelector('.profile__name');
-const _profileAbout = _profile.querySelector('.profile__about');
+const _profileName = _profile.querySelector(profileNameSelector);
+const _profileAbout = _profile.querySelector(profileAboutSelector);
 const profileBtnEdit = document.querySelector('.profile__edit-btn');
 const profileBtnAddCard = document.querySelector('.profile__add-card');
 
@@ -66,5 +70,7 @@ export {
   cardTemplate,
   imagePopupSelector,
   profilePopupSelector,
-  newCardPopupSelector
+  newCardPopupSelector,
+  profileNameSelector,
+  profileAboutSelector
 };

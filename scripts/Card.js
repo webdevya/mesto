@@ -1,6 +1,6 @@
 class Card {
   constructor(
-    { link, caption },
+    { caption, link },
     { favBtnSelector, trashBtnSelector, captionSelector, imageSelector },
     cardTemplate,
     { openImagePopupHandler, favHandler, trashHandler }) {
