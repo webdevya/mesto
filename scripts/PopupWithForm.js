@@ -1,39 +1,29 @@
-import Popup from "./Popup";
+import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, popupOpenedClass, closeBtnSelector, formSelector, inputSelector }, handleFormSubmit) {
     super({ popupSelector, popupOpenedClass, closeBtnSelector });
     this._handleFormSubmit = handleFormSubmit;
-    this._form = super._popup.querySelector(formSelector);
+    this._form = this._popup.querySelector(formSelector);
     this._inputs = this._form.querySelectorAll(inputSelector); //'.popup__input'
 
+    this.setEventListeners.bind(this);
+    this.close = this.close.bind(this);
   }
 
-
-  // _traverseInputs(traversalAction) {
-
-  //   for (let input of this._inputs) {
-  //     traversalAction(input);
-  //   }
-  // }
-
-  _getInputValues() {
-    const res = [];
-    // _traverseInputs(input => {
-    //   res.push({ name: input.getAttribute('name'), value: input.value });
-    // });
-
-    // const inputs = this._form.querySelectorAll(this._inputSelector); //'.popup__input'
+  _getInputValues = () => {
+    const res = {};
     for (let input of this._inputs) {
-      res.push({ name: input.getAttribute('name'), value: input.value })
+      res[input.getAttribute('name')] = input.value;
     }
 
     return res;
   }
 
   initInputValues(inputValues) {
-    inputValues.forEach(initial => {
-      this._inputs[initial.name].value = initial.value;
+    this._inputs.forEach(input => {
+      if (inputValues[input.name])
+        input.value = inputValues[input.name];
     });
   }
 

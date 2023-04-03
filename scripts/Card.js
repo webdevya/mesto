@@ -10,8 +10,6 @@ class Card {
     this._openImagePopupHandler = openImagePopupHandler;
     this._favHandler = favHandler;
     this._trashHandler = trashHandler;
-    this._cardSelectors = cardSelectors;
-    this._handleCardClick = handleCardClick;
     this._favBtnSelector = favBtnSelector;
     this._trashBtnSelector = trashBtnSelector;
     this._captionSelector = captionSelector;
