@@ -1,8 +1,8 @@
-import '../pages/index.css';
+import './index.css';
 
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import PopupWithImage from './PopupWithImage.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import {
   formConstants,
   formSelector,
@@ -21,24 +21,11 @@ import {
   newCardPopupSelector,
   profileNameSelector,
   profileAboutSelector
-} from './constants/indexConstants.js';
-import PopupWithForm from './PopupWithForm.js';
-import Section from './Section.js';
-import UserInfo from './UserInfo.js';
-import { initialCards } from './constants/cards.js';
-
-function toggleFavState(evt) {
-  evt.preventDefault();
-  const btn = evt.currentTarget;
-  btn.classList.toggle('elements__card-fav-btn_state_checked');
-}
-
-function removeCard(evt) {
-  const el = evt.currentTarget;
-  const card = el.closest('.elements__card');
-  card.remove();
-}
-
+} from '../utils/indexConstants.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import { initialCards } from '../utils/cards.js';
 
 const currentUser = new UserInfo({ profileNameSelector, profileAboutSelector });
 
@@ -54,16 +41,12 @@ const cardsSection = new Section(
     renderer: item => {
       const card = new Card(
         {
-          caption: item['img-name'],//.name,
-          link: item['img-link']//.link,
+          caption: item['img-name'],
+          link: item['img-link']
         },
         cardSelectors,
         cardTemplate,
-        {
-          openImagePopupHandler: popups.imgPopup.open,
-          favHandler: toggleFavState,
-          trashHandler: removeCard
-        }
+        popups.imgPopup.open
       );
 
       cardsSection.addItem(card.createCard());
@@ -73,12 +56,7 @@ const cardsSection = new Section(
 
 popups.newCardPopup = new PopupWithForm({ popupSelector: newCardPopupSelector, ...popupConstants, formSelector, inputSelector },
   (inputs) => {
-    // const cardData = {};
-    // inputNameToCardAttrMap.forEach(pair => {
-    //   cardData[pair.cardAttr] = inputs[pair.inputName];
-    // });
-
-    cardsSection.renderItem(inputs);//(cardData);
+    cardsSection.renderItem(inputs);
   })
 
 Object.values(popups).forEach(popup => {
@@ -93,10 +71,6 @@ Object.values(popups).forEach(popup => {
 cardsSection.renderItems();
 
 profileBtnEdit.addEventListener('click', () => {
-  // const inputs = {};
-  // profileInputsToElementsMap.forEach(match => {
-  //   inputs[match.inputName] = match.elementItem.textContent;
-  // });
   popups.profilePopup.initInputValues(currentUser.getUserInfo());
   popups.profilePopup.open();
 });

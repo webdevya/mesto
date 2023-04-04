@@ -16,7 +16,8 @@ const cardSelectors = {
   favBtnSelector: '.elements__card-fav-btn',
   trashBtnSelector: '.elements__card-trash-btn',
   captionSelector: '.elements__card-caption-text',
-  imageSelector: '.elements__card-image'
+  imageSelector: '.elements__card-image',
+  favBtnChekedClass: 'elements__card-fav-btn_state_checked'
 };
 
 const popupConstants = {
