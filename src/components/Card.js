@@ -29,11 +29,15 @@ class Card {
       this._btnTrash.removeEventListener('click', this._removeCard);
   }
 
+  _openImg() {
+    this._handleCardClick({ caption: this._caption, link: this._link });
+  }
+
   _subscribeOpenImg(subscribe = true) {
     if (subscribe)
-      this._img.addEventListener('click', this._handleCardClick);
+      this._img.addEventListener('click', this._openImg);
     else
-      this._img.removeEventListener('click', this._handleCardClick);
+      this._img.removeEventListener('click', this._openImg);
   }
 
   _subscribeElements(subscribe = true) {
@@ -72,15 +76,6 @@ class Card {
     this._saveElements({});
   }
 
-  createCard() {
-
-    const elements = this._getCardElements();
-    this._fillProps(elements);
-    this._addCardBehaviour(elements);
-
-    return elements.card;
-  }
-
   _toggleFavState() {
     this._favBtn.classList.toggle(this._favBtnCheckedClass);//('elements__card-fav-btn_state_checked');
   }
@@ -90,6 +85,13 @@ class Card {
     this._card.remove();
   }
 
+  createCard() {
+    const elements = this._getCardElements();
+    this._fillProps(elements);
+    this._addCardBehaviour(elements);
+
+    return elements.card;
+  }
 }
 
 export default Card;
