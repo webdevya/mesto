@@ -15,74 +15,74 @@ class Card {
     this._favBtnCheckedClass = favBtnChekedClass;
   }
 
-  _subscribeFav(subscribe = true) {
+  _subscribeFav = (subscribe = true) => {
     if (subscribe)
       this._favBtn.addEventListener('click', this._toggleFavState);
     else
       this._favBtn.removeEventListener('click', this._toggleFavState);
   }
 
-  _subscribeTrash(subscribe = true) {
+  _subscribeTrash = (subscribe = true) => {
     if (subscribe)
       this._btnTrash.addEventListener('click', this._removeCard);
     else
       this._btnTrash.removeEventListener('click', this._removeCard);
   }
 
-  _openImg() {
+  _openImg = () => {
     this._handleCardClick({ caption: this._caption, link: this._link });
   }
 
-  _subscribeOpenImg(subscribe = true) {
+  _subscribeOpenImg = (subscribe = true) => {
     if (subscribe)
       this._img.addEventListener('click', this._openImg);
     else
       this._img.removeEventListener('click', this._openImg);
   }
 
-  _subscribeElements(subscribe = true) {
+  _subscribeElements = (subscribe = true) => {
     this._subscribeOpenImg(subscribe);
     this._subscribeFav(subscribe);
     this._subscribeTrash(subscribe);
   }
 
-  _fillProps(cardElements) {
+  _fillProps = (cardElements) => {
     cardElements.img.src = this._link;
     cardElements.img.alt = this._caption;
     cardElements.card.querySelector(this._captionSelector).textContent = this._caption;
   }
 
-  _getCardElements() {
+  _getCardElements = () => {
     const card = this._cardTemplate.cloneNode(true);
     const img = card.querySelector(this._imageSelector);
     const btnTrash = card.querySelector(this._trashBtnSelector);
-    const favBtn = elements.card.querySelector(this._favBtnSelector);
+    const favBtn = card.querySelector(this._favBtnSelector);
     return { card, img, btnTrash, favBtn };
   }
 
-  _saveElements({ card, img, btnTrash, favBtn }) {
+  _saveElements = ({ card, img, btnTrash, favBtn }) => {
     this._favBtn = favBtn;
     this._card = card;
-    this.btnTrash = btnTrash;
+    this._btnTrash = btnTrash;
     this._img = img;
   }
 
-  _addCardBehaviour({ card, img, btnTrash, favBtn }) {
+  _addCardBehaviour = ({ card, img, btnTrash, favBtn }) => {
     this._saveElements({ card, img, btnTrash, favBtn });
-    _subscribeElements(true);
+    this._subscribeElements(true);
   }
-  _removeCardBehaviuor() {
-    _subscribeElements(false);
+  _removeCardBehaviuor = () => {
+    this._subscribeElements(false);
     this._saveElements({});
   }
 
-  _toggleFavState() {
+  _toggleFavState = () => {
     this._favBtn.classList.toggle(this._favBtnCheckedClass);//('elements__card-fav-btn_state_checked');
   }
 
-  _removeCard() {
-    this._removeCardBehaviuor();
+  _removeCard = () => {
     this._card.remove();
+    this._removeCardBehaviuor();
   }
 
   createCard() {
