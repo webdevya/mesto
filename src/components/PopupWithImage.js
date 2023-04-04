@@ -5,13 +5,10 @@ export default class PopupWithImage extends Popup {
     super({ popupSelector, popupOpenedClass, closeBtnSelector });
     this._popupViewImgImage = this._popup.querySelector(popupViewImgSelector);
     this._popupViewImgCaption = this._popup.querySelector(popupViewImgCaptionSelector);
-    this.open = this.open.bind(this);
+
   }
 
-  open({ caption, link }) {
-    // const img = evt.currentTarget;
-    // const caption = img.getAttribute('alt');
-    // const src = img.getAttribute('src');
+  open = ({ caption, link }) => {
 
     this._popupViewImgImage.setAttribute('alt', caption);
     this._popupViewImgImage.setAttribute('src', link);

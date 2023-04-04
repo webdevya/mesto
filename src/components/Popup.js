@@ -3,9 +3,6 @@ export default class Popup {
     this._popup = document.querySelector(popupSelector);
     this._popupOpenedClass = popupOpenedClass;
     this._closeBtn = this._popup.querySelector(closeBtnSelector);
-    this.close = this.close.bind(this);
-    this.open = this.open.bind(this);
-    this.setEventListeners = this.setEventListeners.bind(this);
   }
 
   open() {
@@ -29,7 +26,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._closeBtn.addEventListener('click', this.close);
+    this._closeBtn.addEventListener('click', () => { this.close(); });
     this._popup.addEventListener('mousedown', this._handleClickByOverlayClose);
   }
 }

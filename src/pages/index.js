@@ -74,7 +74,7 @@ profileBtnEdit.addEventListener('click', () => {
   popups.profilePopup.initInputValues(currentUser.getUserInfo());
   popups.profilePopup.open();
 });
-profileBtnAddCard.addEventListener('click', popups.newCardPopup.open);
+profileBtnAddCard.addEventListener('click', () => { popups.newCardPopup.open(); });
 
 
 
