@@ -20,7 +20,24 @@ export default class ApiBase {
       });
   }
 
+  updateData(localUrl, dataObj) {
+    return fetch(this._getUrl(localUrl), {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(dataObj)
+    }).then(res => {
+      if (!res.ok) {
+        return Promise.resolve();
+      }
+
+      // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
+      return Promise.reject(res.status);
+    });
+  }
+
   _getUrl(localUrl) {
     return this._baseUrl + localUrl;
   }
 }
+
+

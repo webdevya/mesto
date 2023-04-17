@@ -19,6 +19,10 @@ export default class Api extends ApiBase {
     return super.getDataJson(this._userLocalUrl);
   }
 
+  updateUserProps(userProps) {
+    return super.updateData(this._userLocalUrl, userProps);
+  }
+
 
 
 

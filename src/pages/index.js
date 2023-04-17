@@ -10,11 +10,11 @@ import {
   popupConstants,
   popupImgSelectors,
   inputSelector,
-  inputNameToCardAttrMap,
+  //inputNameToCardAttrMap,
   cardContainerSelector,
   profileBtnEdit,
   profileBtnAddCard,
-  profileInputsToElementsMap,
+  //profileInputsToElementsMap,
   cardTemplate,
   imagePopupSelector,
   profilePopupSelector,
@@ -45,17 +45,22 @@ const currentUser = new UserInfo();
 api.getUserInfo().then(res => {
   currentUser.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar, id: res._id, cohort: res.cohort });
   Promise.resolve();
-}).then(() => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); });
+}).then(() => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); })
+  .catch(err => console.log(err));
 
 const popups = {
   imgPopup: new PopupWithImage({ popupSelector: imagePopupSelector, ...popupConstants, ...popupImgSelectors }),
   profilePopup: new PopupWithForm({ popupSelector: profilePopupSelector, ...popupConstants, formSelector, inputSelector },
-    (inputs) => { currentUser.setUserInfo(inputs); }),
+    (inputs) => {
+      currentUser.updateUserInfoProps({ name: inputs['profile-name'], about: inputs['profile-about'] });
+      userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar });
+      api.updateUserProps({ name: currentUser.name, about: currentUser.about }).catch(err => console.log(err));
+    }),
 };
 
 const cardsSection = new Section(
   {
-    items: api.getInitialCards(),
+    items: api.getInitialCards().catch(err => console.log(err)),
     renderer:
       item => {
         const card = new Card(
@@ -103,7 +108,7 @@ Object.values(popups).forEach(popup => {
 cardsSection.renderItems();
 
 profileBtnEdit.addEventListener('click', () => {
-  popups.profilePopup.initInputValues(currentUser.getUserInfo());
+  popups.profilePopup.initInputValues({ 'profile-name': currentUser.name, 'profile-about': currentUser.about });
   popups.profilePopup.open();
 });
 profileBtnAddCard.addEventListener('click', () => { popups.newCardPopup.open(); });

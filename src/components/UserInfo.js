@@ -13,6 +13,11 @@ export default class UserInfo {
     this._cohort = cohort;
   }
 
+  updateUserInfoProps({ name, about }) {
+    this._name = name;
+    this._about = about;
+  }
+
 
 
   get name() {
