@@ -1,11 +1,12 @@
 class Card {
   constructor(
-    { caption, link },
+    { caption, link, id },
     { favBtnSelector, trashBtnSelector, captionSelector, imageSelector, favBtnChekedClass },
     cardTemplate,
     handleCardClick) {
     this._link = link;
     this._caption = caption;
+    this._id = id;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
     this._favBtnSelector = favBtnSelector;

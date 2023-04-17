@@ -56,6 +56,8 @@ const profileInputsToElementsMap = [
 
 const cardTemplate = document.querySelector('.elements-card-template').content.querySelector('.elements__card');
 
+const localUrls = { cardLocalUrl: 'cards', cardLikeLocalUrl: 'likes', userLocalUrl: 'users/me', userAvatarLocalUrl: 'avatar' }
+
 export {
   formConstants,
   formSelector,
@@ -73,5 +75,6 @@ export {
   profilePopupSelector,
   newCardPopupSelector,
   profileNameSelector,
-  profileAboutSelector
+  profileAboutSelector,
+  localUrls
 };

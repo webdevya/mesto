@@ -20,12 +20,22 @@ import {
   profilePopupSelector,
   newCardPopupSelector,
   profileNameSelector,
-  profileAboutSelector
+  profileAboutSelector,
+  localUrls
 } from '../utils/indexConstants.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import { initialCards } from '../utils/cards.js';
+import Api from '../components/Api';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-64/',
+  headers: {
+    authorization: 'fc81dab5-e143-401c-aaf5-84987c8320c2',
+    'Content-Type': 'application/json'
+  }
+}, localUrls);
 
 const currentUser = new UserInfo({ profileNameSelector, profileAboutSelector });
 
@@ -37,12 +47,13 @@ const popups = {
 
 const cardsSection = new Section(
   {
-    items: initialCards,
+    itemsPromise: api.getInitialCards(),//Promise.resolve(initialCards),
     renderer: item => {
       const card = new Card(
         {
-          caption: item['img-name'],
-          link: item['img-link']
+          caption: item.name,
+          link: item.link,
+          id: item.id
         },
         cardSelectors,
         cardTemplate,
