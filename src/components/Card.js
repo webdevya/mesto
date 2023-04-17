@@ -1,12 +1,15 @@
 class Card {
   constructor(
-    { caption, link, id },
+    { caption, link, id, likes, isOwner, createDate },
     { favBtnSelector, trashBtnSelector, captionSelector, imageSelector, favBtnChekedClass },
     cardTemplate,
     handleCardClick) {
     this._link = link;
     this._caption = caption;
     this._id = id;
+    this._likes = likes;
+    this._isOwner = isOwner;
+    this._createDate = createDate;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
     this._favBtnSelector = favBtnSelector;
@@ -24,10 +27,12 @@ class Card {
   }
 
   _subscribeTrash = (subscribe = true) => {
-    if (subscribe)
-      this._btnTrash.addEventListener('click', this._removeCard);
-    else
-      this._btnTrash.removeEventListener('click', this._removeCard);
+    if (this._isOwner) {
+      if (subscribe)
+        this._btnTrash.addEventListener('click', this._removeCard);
+      else
+        this._btnTrash.removeEventListener('click', this._removeCard);
+    }
   }
 
   _openImg = () => {
@@ -57,6 +62,9 @@ class Card {
     const card = this._cardTemplate.cloneNode(true);
     const img = card.querySelector(this._imageSelector);
     const btnTrash = card.querySelector(this._trashBtnSelector);
+    if (!this._isOwner) {
+      btnTrash.remove();
+    }
     const favBtn = card.querySelector(this._favBtnSelector);
     return { card, img, btnTrash, favBtn };
   }

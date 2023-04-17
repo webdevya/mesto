@@ -25,6 +25,10 @@ export default class UserInfo {
     return this._avatar;
   }
 
+  get id() {
+    return this._id;
+  }
+
 }
 
 

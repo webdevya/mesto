@@ -43,7 +43,7 @@ const api = new Api({
 const currentUser = new UserInfo();
 //({ profileNameSelector, profileAboutSelector });
 api.getUserInfo().then(res => {
-  currentUser.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar, id: res.id, cohort: res.cohort });
+  currentUser.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar, id: res._id, cohort: res.cohort });
   Promise.resolve();
 }).then(() => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); });
 
@@ -62,13 +62,16 @@ const cardsSection = new Section(
           {
             caption: item.name,
             link: item.link,
-            id: item.id
+            id: item._id,
+            likes: item.likes.length,
+            createDate: item.createdAt,
+            isOwner: item.owner._id === currentUser.id
+
           },
           cardSelectors,
           cardTemplate,
           popups.imgPopup.open
         );
-
         cardsSection.addItem(card.createCard());
       }
   },
