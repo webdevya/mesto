@@ -19,8 +19,9 @@ import {
   imagePopupSelector,
   profilePopupSelector,
   newCardPopupSelector,
-  profileNameSelector,
-  profileAboutSelector,
+  profileNameElement,
+  profileAboutElement,
+  profileAvatarElement,
   localUrls
 } from '../utils/indexConstants.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -28,6 +29,8 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import { initialCards } from '../utils/cards.js';
 import Api from '../components/Api';
+import SectionBase from '../components/SectionBase';
+
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-64/',
@@ -37,7 +40,12 @@ const api = new Api({
   }
 }, localUrls);
 
-const currentUser = new UserInfo({ profileNameSelector, profileAboutSelector });
+const currentUser = new UserInfo();
+//({ profileNameSelector, profileAboutSelector });
+api.getUserInfo().then(res => {
+  currentUser.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar, id: res.id, cohort: res.cohort });
+  Promise.resolve();
+}).then(() => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); });
 
 const popups = {
   imgPopup: new PopupWithImage({ popupSelector: imagePopupSelector, ...popupConstants, ...popupImgSelectors }),
@@ -47,23 +55,33 @@ const popups = {
 
 const cardsSection = new Section(
   {
-    itemsPromise: api.getInitialCards(),//Promise.resolve(initialCards),
-    renderer: item => {
-      const card = new Card(
-        {
-          caption: item.name,
-          link: item.link,
-          id: item.id
-        },
-        cardSelectors,
-        cardTemplate,
-        popups.imgPopup.open
-      );
+    items: api.getInitialCards(),
+    renderer:
+      item => {
+        const card = new Card(
+          {
+            caption: item.name,
+            link: item.link,
+            id: item.id
+          },
+          cardSelectors,
+          cardTemplate,
+          popups.imgPopup.open
+        );
 
-      cardsSection.addItem(card.createCard());
-    }
+        cardsSection.addItem(card.createCard());
+      }
   },
   cardContainerSelector);
+
+const userSection = new SectionBase(
+  ({ name, about, avatar }) => {
+    profileNameElement.textContent = name;
+    profileAboutElement.textContent = about;
+    profileAvatarElement.src = avatar;
+    profileAvatarElement.alt = name;
+  }
+)
 
 popups.newCardPopup = new PopupWithForm({ popupSelector: newCardPopupSelector, ...popupConstants, formSelector, inputSelector },
   (inputs) => {
@@ -78,7 +96,7 @@ Object.values(popups).forEach(popup => {
   popup.setEventListeners();
 });
 
-
+//userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar });
 cardsSection.renderItems();
 
 profileBtnEdit.addEventListener('click', () => {

@@ -1,19 +1,15 @@
-export default class Section {
-  constructor({ itemsPromise, renderer }, containerSelector) {
-    this._itemsPromise = itemsPromise;
-    this._renderer = renderer;
+import SectionBase from "./SectionBase";
+
+export default class Section extends SectionBase {
+  constructor({ items, renderer }, containerSelector) {
+    super(renderer);
+    this._items = items;
     this._container = document.querySelector(containerSelector);
   }
 
   renderItems = () => {
     this.clear();
-    //this._items.forEach(item => this._renderer(item));
-    this._itemsPromise.then(items => { items.forEach(item => this._renderer(item)); console.log(items); })
-
-  }
-
-  renderItem = (item) => {
-    this._renderer(item);
+    this._items.then(items => { items.forEach(item => super.renderItem(item)); })
   }
 
   clear = () => {

@@ -15,6 +15,10 @@ export default class Api extends ApiBase {
     return super.getDataJson(this._cardLocalUrl);
   }
 
+  getUserInfo() {
+    return super.getDataJson(this._userLocalUrl);
+  }
+
 
 
 
