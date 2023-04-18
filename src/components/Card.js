@@ -3,7 +3,7 @@ class Card {
     { caption, link, id, likes, isLiked, isOwner, createDate },
     { favBtnSelector, trashBtnSelector, captionSelector, imageSelector, favBtnChekedClass },
     cardTemplate,
-    handleCardClick) {
+    { handleCardClick, handleDeleteCard }) {
     this._link = link;
     this._caption = caption;
     this._id = id;
@@ -13,6 +13,7 @@ class Card {
     this._createDate = createDate;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
     this._favBtnSelector = favBtnSelector;
     this._trashBtnSelector = trashBtnSelector;
     this._captionSelector = captionSelector;
@@ -94,8 +95,13 @@ class Card {
   }
 
   _removeCard = () => {
-    this._card.remove();
-    this._removeCardBehaviuor();
+
+    this._handleDeleteCard(this._id).then(res => {
+      this._card.remove();
+      this._removeCardBehaviuor();
+    });
+
+
   }
 
   createCard() {

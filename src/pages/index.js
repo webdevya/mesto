@@ -79,7 +79,12 @@ const cardsSection = new Section(
           },
           cardSelectors,
           cardTemplate,
-          popups.imgPopup.open
+          {
+            handleCardClick: popups.imgPopup.open,
+            handleDeleteCard: (id) => {
+              return api.deleteCard(id);
+            }
+          }
         );
         cardsSection.addItem(card.createCard());
       }

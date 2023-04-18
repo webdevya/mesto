@@ -50,7 +50,24 @@ export default class ApiBase {
     });
   }
 
-  _getUrl(localUrl) {
+  deleteData(localUrl, id) {
+    return fetch(this._getUrl(localUrl, id), {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return Promise.resolve(id);
+        }
+
+        // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
+        return Promise.reject(res.status);
+      });
+  }
+
+  _getUrl(localUrl, id) {
+    if (id)
+      return `${this._baseUrl}${localUrl}/${id}`;
     return this._baseUrl + localUrl;
   }
 }

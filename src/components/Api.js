@@ -26,4 +26,8 @@ export default class Api extends ApiBase {
   addCard({ name, link }) {
     return super.addData(this._cardLocalUrl, { name, link });
   }
+
+  deleteCard(id) {
+    return super.deleteData(this._cardLocalUrl, id);
+  }
 }
