@@ -4,7 +4,6 @@ export default class SectionBase {
   }
 
   renderItem(item) {
-
     this._renderer(item);
   }
 }

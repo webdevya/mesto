@@ -44,17 +44,20 @@ const currentUser = new UserInfo();
 //({ profileNameSelector, profileAboutSelector });
 api.getUserInfo().then(res => {
   currentUser.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar, id: res._id, cohort: res.cohort });
-  Promise.resolve();
-}).then(() => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); })
+  return Promise.resolve({ name: res.name, about: res.about, avatar: res.avatar });
+}).then((res) => { userSection.renderItem({ name: res.name, about: res.about, avatar: res.avatar }); })
   .catch(err => console.log(err));
 
 const popups = {
   imgPopup: new PopupWithImage({ popupSelector: imagePopupSelector, ...popupConstants, ...popupImgSelectors }),
+
   profilePopup: new PopupWithForm({ popupSelector: profilePopupSelector, ...popupConstants, formSelector, inputSelector },
     (inputs) => {
       currentUser.updateUserInfoProps({ name: inputs['profile-name'], about: inputs['profile-about'] });
-      userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar });
-      api.updateUserProps({ name: currentUser.name, about: currentUser.about }).catch(err => console.log(err));
+
+      api.updateUserProps({ name: currentUser.name, about: currentUser.about })
+        .then((res) => { userSection.renderItem({ name: res.name, about: res.about, avatar: currentUser.avatar }); })
+        .catch(err => console.log(err));
     }),
 };
 
@@ -70,7 +73,8 @@ const cardsSection = new Section(
             id: item._id,
             likes: item.likes.length,
             createDate: item.createdAt,
-            isOwner: item.owner._id === currentUser.id
+            isOwner: item.owner._id === currentUser.id,
+            isLiked: item.likes.some(x => x._id === currentUser.id)
 
           },
           cardSelectors,
@@ -86,14 +90,18 @@ const userSection = new SectionBase(
   ({ name, about, avatar }) => {
     profileNameElement.textContent = name;
     profileAboutElement.textContent = about;
-    profileAvatarElement.src = avatar;
-    profileAvatarElement.alt = name;
+    if (avatar) {
+      profileAvatarElement.src = avatar;
+      profileAvatarElement.alt = name;
+    }
   }
 )
 
 popups.newCardPopup = new PopupWithForm({ popupSelector: newCardPopupSelector, ...popupConstants, formSelector, inputSelector },
   (inputs) => {
-    cardsSection.renderItem(inputs);
+    api.addCard({ name: inputs['img-name'], link: inputs['img-link'] })
+      .then(res => { cardsSection.renderItem(res); })
+      .catch(err => { console.log(err); });
   })
 
 Object.values(popups).forEach(popup => {

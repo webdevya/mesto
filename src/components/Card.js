@@ -1,6 +1,6 @@
 class Card {
   constructor(
-    { caption, link, id, likes, isOwner, createDate },
+    { caption, link, id, likes, isLiked, isOwner, createDate },
     { favBtnSelector, trashBtnSelector, captionSelector, imageSelector, favBtnChekedClass },
     cardTemplate,
     handleCardClick) {
@@ -9,6 +9,7 @@ class Card {
     this._id = id;
     this._likes = likes;
     this._isOwner = isOwner;
+    this._isLiked = isLiked;
     this._createDate = createDate;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
@@ -56,6 +57,9 @@ class Card {
     cardElements.img.src = this._link;
     cardElements.img.alt = this._caption;
     cardElements.card.querySelector(this._captionSelector).textContent = this._caption;
+
+    if (this._isLiked)
+      this._toggleFavState();
   }
 
   _getCardElements = () => {
