@@ -86,6 +86,17 @@
       </figure>
     </div>
   </dialog>
+
+  <dialog class="popup popup_overlay-opacity_middle popup_type_confirm">
+    <div class="popup__form-group popup-wnd">
+      <button type="reset" class="popup__close-btn image-btn image-btn_hover-opacity_medium"></button>
+      <h2 class="popup__form-header">Вы уверены?</h2>
+      <form class="popup__view popup__form" novalidate>
+        <button type="submit" class="popup__save-btn">Да</button>
+      </form>
+    </div>
+  </dialog>
+
   <template class="elements-card-template">
     <li class="elements__card">
       <figure class="elements__card-figure">
@@ -93,7 +104,10 @@
         <img class="elements__card-image">
         <figcaption class="elements__card-caption">
           <h2 class="elements__card-caption-text"></h2>
-          <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
+          <div class="elements__card-fav">
+            <button type="button" class="elements__card-fav-btn image-btn image-btn_hover-opacity_low"></button>
+            <p class="elements__card-fav-count">0</p>
+          </div>
         </figcaption>
       </figure>
     </li>

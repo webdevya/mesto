@@ -30,4 +30,12 @@ export default class Api extends ApiBase {
   deleteCard(id) {
     return super.deleteData(this._cardLocalUrl, id);
   }
+
+  setLike(id) {
+    return super.putData(this._cardLocalUrl, null, `${id}/${this._cardLikeLocalUrl}`)
+  }
+
+  deleteLike(id) {
+    return super.deleteData(this._cardLocalUrl, `${id}/${this._cardLikeLocalUrl}`)
+  }
 }

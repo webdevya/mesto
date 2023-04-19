@@ -34,6 +34,8 @@
 @import url(../blocks/elements/__card-caption/elements__card-caption.css);
 @import url(../blocks/elements/__card-fav-btn/elements__card-fav-btn.css);
 @import url(../blocks/elements/__card-fav-btn/_state/elements__card-fav-btn_state.css);
+@import url(../blocks/elements/__card-fav/elements__card-fav.css);
+@import url(../blocks/elements/__card-fav-count/elements__card-fav-count.css);
 @import url(../blocks/elements/__card-caption-text/elements__card-caption-text.css);
 @import url(../blocks/elements/__cards/elements__cards.css);
 @import url(../blocks/elements/__card-trash-btn/elements__card-trash-btn.css);

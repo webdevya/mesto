@@ -17,6 +17,7 @@ const cardSelectors = {
   trashBtnSelector: '.elements__card-trash-btn',
   captionSelector: '.elements__card-caption-text',
   imageSelector: '.elements__card-image',
+  favCountSelector: '.elements__card-fav-count',
   favBtnChekedClass: 'elements__card-fav-btn_state_checked'
 };
 
@@ -28,6 +29,7 @@ const popupConstants = {
 const imagePopupSelector = '.popup_type_img';
 const profilePopupSelector = '.popup_type_form-profile';
 const newCardPopupSelector = '.popup_type_form-img';
+const confirmPopupSelector = '.popup_type_confirm';
 
 const popupImgSelectors = {
   popupViewImgSelector: '.popup__image',
@@ -76,6 +78,7 @@ export {
   imagePopupSelector,
   profilePopupSelector,
   newCardPopupSelector,
+  confirmPopupSelector,
   profileNameElement,
   profileAboutElement,
   profileAvatarElement,

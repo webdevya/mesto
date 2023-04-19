@@ -3,6 +3,7 @@ import './index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import {
   formConstants,
   formSelector,
@@ -19,6 +20,7 @@ import {
   imagePopupSelector,
   profilePopupSelector,
   newCardPopupSelector,
+  confirmPopupSelector,
   profileNameElement,
   profileAboutElement,
   profileAvatarElement,
@@ -27,7 +29,7 @@ import {
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-import { initialCards } from '../utils/cards.js';
+//import { initialCards } from '../utils/cards.js';
 import Api from '../components/Api';
 import SectionBase from '../components/SectionBase';
 
@@ -59,6 +61,7 @@ const popups = {
         .then((res) => { userSection.renderItem({ name: res.name, about: res.about, avatar: currentUser.avatar }); })
         .catch(err => console.log(err));
     }),
+  confirmPopup: new PopupWithConfirm({ popupSelector: confirmPopupSelector, ...popupConstants, formSelector })
 };
 
 const cardsSection = new Section(
@@ -81,8 +84,15 @@ const cardsSection = new Section(
           cardTemplate,
           {
             handleCardClick: popups.imgPopup.open,
-            handleDeleteCard: (id) => {
-              return api.deleteCard(id);
+            handleDeleteCard: (card) => {
+              popups.confirmPopup.open(() => {
+                api.deleteCard(card.id)
+                  .then(() => card.removeCard())
+                  .catch(err => { console.log(err); })
+              });
+            },
+            handleToggleFavState: (id, del) => {
+              return del ? api.deleteLike(id) : api.setLike(id);
             }
           }
         );

@@ -20,11 +20,11 @@ export default class ApiBase {
       });
   }
 
-  updateData(localUrl, dataObj) {
-    return fetch(this._getUrl(localUrl), {
+  updateData(localUrl, dataObj, restPart) {
+    return fetch(this._getUrl(localUrl, restPart), {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(dataObj)
+      body: dataObj ? JSON.stringify(dataObj) : null
     }).then(res => {
       if (res.ok) {
         return Promise.resolve(dataObj);
@@ -50,14 +50,14 @@ export default class ApiBase {
     });
   }
 
-  deleteData(localUrl, id) {
-    return fetch(this._getUrl(localUrl, id), {
+  deleteData(localUrl, restPart) {
+    return fetch(this._getUrl(localUrl, restPart), {
       method: 'DELETE',
       headers: this._headers
     })
       .then(res => {
         if (res.ok) {
-          return Promise.resolve(id);
+          return res.json();
         }
 
         // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
@@ -65,9 +65,24 @@ export default class ApiBase {
       });
   }
 
-  _getUrl(localUrl, id) {
-    if (id)
-      return `${this._baseUrl}${localUrl}/${id}`;
+  putData(localUrl, dataObj, restPart) {
+    return fetch(this._getUrl(localUrl, restPart), {
+      method: 'PUT',
+      headers: this._headers,
+      body: dataObj ? JSON.stringify(dataObj) : null
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
+      return Promise.reject(res.status);
+    });
+  }
+
+  _getUrl(localUrl, restPart) {
+    if (restPart)
+      return `${this._baseUrl}${localUrl}/${restPart}`;
     return this._baseUrl + localUrl;
   }
 }
