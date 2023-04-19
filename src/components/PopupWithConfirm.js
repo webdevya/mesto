@@ -4,23 +4,15 @@ export default class PopupWithConfirm extends Popup {
   constructor({ popupSelector, popupOpenedClass, closeBtnSelector, confirmBtnSelector }) {
     super({ popupSelector, popupOpenedClass, closeBtnSelector });
     this._confirmBtn = this._popup.querySelector(confirmBtnSelector);
-
+    this._defaultSubmitText = this._confirmBtn.textContent;
   }
 
-  // setEventListeners() {
-  //   super.setEventListeners();
-  //   this._form.addEventListener('submit', (evt) => {
-  //     evt.preventDefault();
-  //     this._handleFormSubmit();
-  //     this.close();
-  //   });
-  // }
-
+  showProgress(progressText) {
+    this._confirmBtn.textContent = progressText;
+  }
   _confirm = (evt) => {
     evt.preventDefault();
     this._handleConfirm();
-    this.close();
-
   }
 
   _toggleSubmitListener(set) {
@@ -39,8 +31,6 @@ export default class PopupWithConfirm extends Popup {
   close() {
     this._toggleSubmitListener(false);
     super.close();
-
+    this._confirmBtn.textContent = this._defaultSubmitText;
   }
-
-
 }

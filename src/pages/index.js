@@ -55,21 +55,25 @@ api.getUserInfo().then(res => {
 const popups = {
   imgPopup: new PopupWithImage({ popupSelector: imagePopupSelector, ...popupConstants, ...popupImgSelectors }),
 
-  profilePopup: new PopupWithForm({ popupSelector: profilePopupSelector, ...popupConstants, formSelector, inputSelector },
+  profilePopup: new PopupWithForm({ popupSelector: profilePopupSelector, ...popupConstants, formSelector, inputSelector, submitBtnSelector: formConstants.submitButtonSelector },
     (inputs) => {
+      popups.profilePopup.showProgress('Сохранение...');
       currentUser.updateUserInfoProps({ name: inputs['profile-name'], about: inputs['profile-about'] });
 
       api.updateUserProps({ name: currentUser.name, about: currentUser.about })
-        .then((res) => { userSection.renderItem({ name: res.name, about: res.about, avatar: currentUser.avatar }); })
+        .then((res) => { userSection.renderItem({ name: res.name, about: res.about, avatar: currentUser.avatar }); return Promise.resolve(); })
+        .then(() => { popups.profilePopup.close(); })
         .catch(err => console.log(err));
     }),
   confirmPopup: new PopupWithConfirm({ popupSelector: confirmPopupSelector, ...popupConstants, confirmBtnSelector: formConstants.submitButtonSelector }),
-  avatarPopup: new PopupWithForm({ popupSelector: avatarPopupSelector, ...popupConstants, formSelector, inputSelector },
+  avatarPopup: new PopupWithForm({ popupSelector: avatarPopupSelector, ...popupConstants, formSelector, inputSelector, submitBtnSelector: formConstants.submitButtonSelector },
     (inputs) => {
+      popups.avatarPopup.showProgress('Сохранение...');
       currentUser.updateAvatar(inputs['profile-avatar']);
 
       api.updateUserAvatar(currentUser.avatar)
-        .then((res) => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); })
+        .then((res) => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); return Promise.resolve(); })
+        .then(() => { popups.avatarPopup.close(); })
         .catch(err => console.log(err));
     })
 };
@@ -96,8 +100,10 @@ const cardsSection = new Section(
             handleCardClick: popups.imgPopup.open,
             handleDeleteCard: (card) => {
               popups.confirmPopup.open(() => {
+                popups.confirmPopup.showProgress('Удаление...');
                 api.deleteCard(card.id)
-                  .then(() => card.removeCard())
+                  .then(() => { card.removeCard(); return Promise.resolve(); })
+                  .then(() => popups.confirmPopup.close())
                   .catch(err => { console.log(err); })
               });
             },
@@ -122,10 +128,12 @@ const userSection = new SectionBase(
   }
 )
 
-popups.newCardPopup = new PopupWithForm({ popupSelector: newCardPopupSelector, ...popupConstants, formSelector, inputSelector },
+popups.newCardPopup = new PopupWithForm({ popupSelector: newCardPopupSelector, ...popupConstants, formSelector, inputSelector, submitBtnSelector: formConstants.submitButtonSelector },
   (inputs) => {
+    popups.newCardPopup.showProgress('Создание...');
     api.addCard({ name: inputs['img-name'], link: inputs['img-link'] })
-      .then(res => { cardsSection.renderItem(res); })
+      .then(res => { cardsSection.renderItem(res); return Promise.resolve(); })
+      .then(() => popups.newCardPopup.close())
       .catch(err => { console.log(err); });
   })
 
