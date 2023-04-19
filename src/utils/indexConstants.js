@@ -30,16 +30,17 @@ const imagePopupSelector = '.popup_type_img';
 const profilePopupSelector = '.popup_type_form-profile';
 const newCardPopupSelector = '.popup_type_form-img';
 const confirmPopupSelector = '.popup_type_confirm';
+const avatarPopupSelector = '.popup_type_form-avatar'
 
 const popupImgSelectors = {
   popupViewImgSelector: '.popup__image',
   popupViewImgCaptionSelector: '.popup__image-caption-text'
 }
 
-const inputNameToCardAttrMap = [
-  { inputName: 'img-name', cardAttr: 'name' },
-  { inputName: 'img-link', cardAttr: 'link' }
-];
+// const inputNameToCardAttrMap = [
+//   { inputName: 'img-name', cardAttr: 'name' },
+//   { inputName: 'img-link', cardAttr: 'link' }
+// ];
 
 
 const profileNameSelector = '.profile__name';
@@ -52,15 +53,16 @@ const profileAboutElement = _profile.querySelector(profileAboutSelector);
 const profileAvatarElement = _profile.querySelector(profileAvatarSelector);
 const profileBtnEdit = document.querySelector('.profile__edit-btn');
 const profileBtnAddCard = document.querySelector('.profile__add-card');
+const profileBtnEditAvatar = document.querySelector('.profile__edit-avatar-btn');
 
-const profileInputsToElementsMap = [
-  { inputName: 'profile-name', elementItem: profileNameElement },
-  { inputName: 'profile-about', elementItem: profileAboutElement }
-];
+// const profileInputsToElementsMap = [
+//   { inputName: 'profile-name', elementItem: profileNameElement },
+//   { inputName: 'profile-about', elementItem: profileAboutElement }
+// ];
 
 const cardTemplate = document.querySelector('.elements-card-template').content.querySelector('.elements__card');
 
-const localUrls = { cardLocalUrl: 'cards', cardLikeLocalUrl: 'likes', userLocalUrl: 'users/me', userAvatarLocalUrl: 'avatar' }
+const localUrls = { cardLocalUrl: 'cards', cardLikeLocalUrl: 'likes', userLocalUrl: 'users/me', userAvatarLocalUrl: 'users/me/avatar' }
 
 export {
   formConstants,
@@ -69,16 +71,18 @@ export {
   popupConstants,
   popupImgSelectors,
   inputSelector,
-  inputNameToCardAttrMap,
+  //inputNameToCardAttrMap,
   cardContainerSelector,
   profileBtnEdit,
   profileBtnAddCard,
-  profileInputsToElementsMap,
+  profileBtnEditAvatar,
+  //profileInputsToElementsMap,
   cardTemplate,
   imagePopupSelector,
   profilePopupSelector,
   newCardPopupSelector,
   confirmPopupSelector,
+  avatarPopupSelector,
   profileNameElement,
   profileAboutElement,
   profileAvatarElement,

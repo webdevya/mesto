@@ -23,6 +23,10 @@ export default class Api extends ApiBase {
     return super.updateData(this._userLocalUrl, userProps);
   }
 
+  updateUserAvatar(avatar) {
+    return super.updateData(this._userAvatarLocalUrl, { avatar });
+  }
+
   addCard({ name, link }) {
     return super.addData(this._cardLocalUrl, { name, link });
   }

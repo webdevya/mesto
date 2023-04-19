@@ -15,12 +15,14 @@ import {
   cardContainerSelector,
   profileBtnEdit,
   profileBtnAddCard,
+  profileBtnEditAvatar,
   //profileInputsToElementsMap,
   cardTemplate,
   imagePopupSelector,
   profilePopupSelector,
   newCardPopupSelector,
   confirmPopupSelector,
+  avatarPopupSelector,
   profileNameElement,
   profileAboutElement,
   profileAvatarElement,
@@ -61,7 +63,15 @@ const popups = {
         .then((res) => { userSection.renderItem({ name: res.name, about: res.about, avatar: currentUser.avatar }); })
         .catch(err => console.log(err));
     }),
-  confirmPopup: new PopupWithConfirm({ popupSelector: confirmPopupSelector, ...popupConstants, formSelector })
+  confirmPopup: new PopupWithConfirm({ popupSelector: confirmPopupSelector, ...popupConstants, confirmBtnSelector: formConstants.submitButtonSelector }),
+  avatarPopup: new PopupWithForm({ popupSelector: avatarPopupSelector, ...popupConstants, formSelector, inputSelector },
+    (inputs) => {
+      currentUser.updateAvatar(inputs['profile-avatar']);
+
+      api.updateUserAvatar(currentUser.avatar)
+        .then((res) => { userSection.renderItem({ name: currentUser.name, about: currentUser.about, avatar: currentUser.avatar }); })
+        .catch(err => console.log(err));
+    })
 };
 
 const cardsSection = new Section(
@@ -136,6 +146,7 @@ profileBtnEdit.addEventListener('click', () => {
 });
 profileBtnAddCard.addEventListener('click', () => { popups.newCardPopup.open(); });
 
+profileBtnEditAvatar.addEventListener('click', () => { popups.avatarPopup.open(); });
 
 
 

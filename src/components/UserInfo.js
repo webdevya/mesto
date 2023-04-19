@@ -18,6 +18,9 @@ export default class UserInfo {
     this._about = about;
   }
 
+  updateAvatar(avatar) {
+    this._avatar = avatar;
+  }
 
 
   get name() {

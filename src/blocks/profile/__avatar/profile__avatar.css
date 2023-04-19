@@ -4,4 +4,10 @@
   box-sizing: border-box;
   border-radius: 50%;
   object-fit: contain;
+  transition: opacity 0.3s ease;
+
+}
+
+.profile__avatar:hover {
+  opacity: 0.2;
 }
