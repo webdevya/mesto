@@ -23,49 +23,36 @@ class Card {
     this._favBtnCheckedClass = favBtnChekedClass;
   }
 
-  _subscribeFav = (subscribe = true) => {
-    if (subscribe)
-      this._favBtn.addEventListener('click', this._updateFavState);
-    else
-      this._favBtn.removeEventListener('click', this._updateFavState);
+  _subscribeFav = () => {
+    this._favBtn.addEventListener('click', this._updateFavState);
   }
 
-  _subscribeTrash = (subscribe = true) => {
-    if (this._isOwner) {
-      if (subscribe)
-        this._btnTrash.addEventListener('click', this._removeCard);
-      else
-        this._btnTrash.removeEventListener('click', this._removeCard);
-    }
+  _subscribeTrash = () => {
+    if (this._isOwner)
+      this._btnTrash.addEventListener('click', this._removeCard);
   }
 
   _openImg = () => {
     this._handleCardClick({ caption: this._caption, link: this._link });
   }
 
-  _subscribeOpenImg = (subscribe = true) => {
-    if (subscribe)
-      this._img.addEventListener('click', this._openImg);
-    else
-      this._img.removeEventListener('click', this._openImg);
+  _subscribeOpenImg = () => {
+    this._img.addEventListener('click', this._openImg);
   }
 
-  _subscribeElements = (subscribe = true) => {
-    this._subscribeOpenImg(subscribe);
-    this._subscribeFav(subscribe);
-    this._subscribeTrash(subscribe);
+  _subscribeElements = () => {
+    this._subscribeOpenImg();
+    this._subscribeFav();
+    this._subscribeTrash();
   }
 
   _fillProps = (cardElements) => {
     cardElements.img.src = this._link;
     cardElements.img.alt = this._caption;
     cardElements.card.querySelector(this._captionSelector).textContent = this._caption;
-    this._fillFavCount();
+    this.updateFavCount(this._likes);
   }
 
-  _fillFavCount = () => {
-    this._favCount.textContent = this._likes;
-  }
 
   _getCardElements = () => {
     const card = this._cardTemplate.cloneNode(true);
@@ -89,30 +76,13 @@ class Card {
 
   _addCardBehaviour = ({ card, img, btnTrash, favBtn, favCount }) => {
     this._saveElements({ card, img, btnTrash, favBtn, favCount });
-    this._subscribeElements(true);
+    this._subscribeElements();
 
-    if (this._isLiked)
-      this._toggleFavState();
+    this.toggleFavState(this._isLiked);
   }
-  // _removeCardBehaviuor = () => {
-  //   this._subscribeElements(false);
-  //   this._saveElements({});
-  // }
 
   _updateFavState = () => {
-    this._handleToggleFavState(this._id, this._favBtn.classList.contains(this._favBtnCheckedClass))
-      .then(res => {
-        this._likes = res.likes.length;
-        this._isLiked = !this._isLiked;
-        return Promise.resolve(this._likes);
-      })
-      .then((res) => { this._fillFavCount(); return Promise.resolve(res); })
-      .then(() => { this._toggleFavState(); })
-      .catch(err => { console.log(err); });
-  }
-
-  _toggleFavState = () => {
-    this._favBtn.classList.toggle(this._favBtnCheckedClass);
+    this._handleToggleFavState(this._id, this._isLiked);
   }
 
   _removeCard = () => {
@@ -123,19 +93,23 @@ class Card {
     this._card.remove();
   }
 
+  toggleFavState = (isLiked) => {
+    this._isLiked = isLiked;
+    if (isLiked)
+      this._favBtn.classList.add(this._favBtnCheckedClass);
+    else
+      this._favBtn.classList.remove(this._favBtnCheckedClass);
+  }
+
+  updateFavCount = (favCount) => {
+    this._likes = favCount;
+    this._favCount.textContent = favCount;
+  }
+
   get id() {
     return this._id;
   }
 
-  // _removeCard = () => {
-
-  //   this._handleDeleteCard(this._id)
-  //     .then(res => {
-  //       this._card.remove();
-  //       //this._removeCardBehaviuor();
-  //     })
-  //     .catch(err => { console.log(err); });
-  // }
 
   createCard() {
     const elements = this._getCardElements();

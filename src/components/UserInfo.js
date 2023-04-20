@@ -1,14 +1,19 @@
 export default class UserInfo {
-  // constructor({
-  //   profileNameSelector,
-  //   profileAboutSelector }) {
+  constructor({
+    profileNameSelector,
+    profileAboutSelector,
+    profileAvatarSelector }) {
+    this._profileNameElement = document.querySelector(profileNameSelector);
+    this._profileAboutElement = document.querySelector(profileAboutSelector);
+    this._profileAvatarElement = document.querySelector(profileAvatarSelector);
+  }
 
-  //   this._profileNameElement = document.querySelector(profileNameSelector);
-  //   this._profileAboutElement = document.querySelector(profileAboutSelector);
   setUserInfo({ name, about, avatar, id, cohort }) {
-    this._name = name;
-    this._about = about;
-    this._avatar = avatar;
+    // this._name = name;
+    // this._about = about;
+    // this._avatar = avatar;
+    this.updateUserInfoProps({ name, about });
+    this.updateAvatar(avatar);
     this._id = id;
     this._cohort = cohort;
   }
@@ -16,10 +21,15 @@ export default class UserInfo {
   updateUserInfoProps({ name, about }) {
     this._name = name;
     this._about = about;
+
+    this._profileNameElement.textContent = name;
+    this._profileAboutElement.textContent = about;
+    this._profileAvatarElement.alt = name;
   }
 
   updateAvatar(avatar) {
     this._avatar = avatar;
+    this._profileAvatarElement.src = this._avatar;
   }
 
 

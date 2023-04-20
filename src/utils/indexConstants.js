@@ -83,8 +83,8 @@ export {
   newCardPopupSelector,
   confirmPopupSelector,
   avatarPopupSelector,
-  profileNameElement,
-  profileAboutElement,
-  profileAvatarElement,
+  profileNameSelector,
+  profileAboutSelector,
+  profileAvatarSelector,
   localUrls
 };

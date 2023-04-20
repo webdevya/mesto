@@ -5,11 +5,9 @@ export default class PopupWithForm extends Popup {
     super({ popupSelector, popupOpenedClass, closeBtnSelector });
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector(formSelector);
-    this._inputs = this._form.querySelectorAll(inputSelector); //'.popup__input'
+    this._inputs = this._form.querySelectorAll(inputSelector);
     this._submitBtn = this._form.querySelector(submitBtnSelector);
     this._defaultSubmitText = this._submitBtn.textContent;
-
-    //this.setEventListeners.bind(this);
   }
 
   _getInputValues = () => {
@@ -23,6 +21,9 @@ export default class PopupWithForm extends Popup {
 
   showProgress(progressText) {
     this._submitBtn.textContent = progressText;
+  }
+  clearProgress() {
+    this._submitBtn.textContent = this._defaultSubmitText;
   }
 
   initInputValues(inputValues) {
@@ -42,7 +43,6 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._submitBtn.textContent = this._defaultSubmitText;
     this._form.reset();
 
   }

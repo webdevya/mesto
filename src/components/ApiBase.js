@@ -9,15 +9,7 @@ export default class ApiBase {
     return fetch(this._getUrl(localUrl), {
       method: 'GET',
       headers: this._headers
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
-        return Promise.reject(res.status);
-      });
+    }).then(res => this._getResponseData(res));
   }
 
   updateData(localUrl, dataObj, restPart) {
@@ -25,14 +17,7 @@ export default class ApiBase {
       method: 'PATCH',
       headers: this._headers,
       body: dataObj ? JSON.stringify(dataObj) : null
-    }).then(res => {
-      if (res.ok) {
-        return Promise.resolve(dataObj);
-      }
-
-      // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
-      return Promise.reject(res.status);
-    });
+    }).then(res => this._getResponseData(res));
   }
 
   addData(localUrl, dataObj) {
@@ -40,14 +25,7 @@ export default class ApiBase {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(dataObj)
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
-      return Promise.reject(res.status);
-    });
+    }).then(res => this._getResponseData(res));
   }
 
   deleteData(localUrl, restPart) {
@@ -55,14 +33,7 @@ export default class ApiBase {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
-        return Promise.reject(res.status);
-      });
+      .then(res => this._getResponseData(res));
   }
 
   putData(localUrl, dataObj, restPart) {
@@ -70,14 +41,14 @@ export default class ApiBase {
       method: 'PUT',
       headers: this._headers,
       body: dataObj ? JSON.stringify(dataObj) : null
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
+    }).then(res => this._getResponseData(res));
+  }
 
-      // если ошибка, отклоняем промис с кодом для дальнейшей его обработки
-      return Promise.reject(res.status);
-    });
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
   }
 
   _getUrl(localUrl, restPart) {

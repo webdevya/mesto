@@ -10,27 +10,36 @@ export default class PopupWithConfirm extends Popup {
   showProgress(progressText) {
     this._confirmBtn.textContent = progressText;
   }
-  _confirm = (evt) => {
-    evt.preventDefault();
-    this._handleConfirm();
+
+  clearProgress() {
+    this._confirmBtn.textContent = this._defaultSubmitText;
   }
 
-  _toggleSubmitListener(set) {
-    if (set)
-      this._confirmBtn.addEventListener('click', this._confirm);
-    else
-      this._confirmBtn.removeEventListener('click', this._confirm);
+  setEventListeners() {
+    super.setEventListeners();
+    this._confirmBtn.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this._handleConfirm();
+    });
   }
+
+
+  // _confirm = (evt) => {
+  //   evt.preventDefault();
+  //   this._handleConfirm();
+  // }
+
+  // _toggleSubmitListener(set) {
+  //   if (set)
+  //     this._confirmBtn.addEventListener('click', this._confirm);
+  //   else
+  //     this._confirmBtn.removeEventListener('click', this._confirm);
+  // }
 
   open(handleConfirm) {
     this._handleConfirm = handleConfirm;
-    this._toggleSubmitListener(true);
+    //this._toggleSubmitListener(true);
     super.open();
   }
 
-  close() {
-    this._toggleSubmitListener(false);
-    super.close();
-    this._confirmBtn.textContent = this._defaultSubmitText;
-  }
 }

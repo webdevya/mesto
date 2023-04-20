@@ -1,15 +1,16 @@
-import SectionBase from "./SectionBase";
-
-export default class Section extends SectionBase {
-  constructor({ items, renderer }, containerSelector) {
-    super(renderer);
-    this._items = items;
+export default class Section {
+  constructor(renderer, containerSelector) {
+    this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems = () => {
+  renderItem = (item) => {
+    this._renderer(item);
+  }
+
+  renderItems = (items) => {
     this.clear();
-    this._items.then(items => { items.forEach(item => super.renderItem(item)); })
+    items.forEach(item => this.renderItem(item));
   }
 
   clear = () => {
