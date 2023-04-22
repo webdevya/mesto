@@ -11,12 +11,10 @@ import {
   popupConstants,
   popupImgSelectors,
   inputSelector,
-  //inputNameToCardAttrMap,
   cardContainerSelector,
   profileBtnEdit,
   profileBtnAddCard,
   profileBtnEditAvatar,
-  //profileInputsToElementsMap,
   cardTemplate,
   imagePopupSelector,
   profilePopupSelector,
@@ -28,12 +26,11 @@ import {
   profileAvatarSelector,
   localUrls
 } from '../utils/indexConstants.js';
+
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-//import { initialCards } from '../utils/cards.js';
 import Api from '../components/Api';
-//import SectionBase from '../components/SectionBase';
 
 import {
   getLikesCount,
@@ -70,9 +67,8 @@ const popups = {
   avatarPopup: new PopupWithForm({ popupSelector: avatarPopupSelector, ...popupConstants, formSelector, inputSelector, submitBtnSelector: formConstants.submitButtonSelector },
     (inputs) => {
       popups.avatarPopup.showProgress('Сохранение...');
-      currentUser.updateAvatar(inputs['profile-avatar']);
 
-      api.updateUserAvatar(currentUser.avatar)
+      api.updateUserAvatar(inputs['profile-avatar'])
         .then(res => {
           currentUser.updateAvatar(res.avatar);
           popups.avatarPopup.close();
@@ -124,14 +120,12 @@ function createCardInstance(data) {
   return card;
 }
 
-
 const cardsSection = new Section(
   item => {
     const card = createCardInstance(item);
     cardsSection.addItem(card.createCard());
   },
   cardContainerSelector);
-
 
 popups.newCardPopup = new PopupWithForm({ popupSelector: newCardPopupSelector, ...popupConstants, formSelector, inputSelector, submitBtnSelector: formConstants.submitButtonSelector },
   (inputs) => {
@@ -154,7 +148,7 @@ Object.values(popups).forEach(popup => {
 });
 
 profileBtnEdit.addEventListener('click', () => {
-  popups.profilePopup.initInputValues({ 'profile-name': currentUser.name, 'profile-about': currentUser.about });
+  popups.profilePopup.initInputValues(currentUser.getUserInfo());
   popups.profilePopup.open();
 });
 

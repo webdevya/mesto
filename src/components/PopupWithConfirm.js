@@ -23,22 +23,8 @@ export default class PopupWithConfirm extends Popup {
     });
   }
 
-
-  // _confirm = (evt) => {
-  //   evt.preventDefault();
-  //   this._handleConfirm();
-  // }
-
-  // _toggleSubmitListener(set) {
-  //   if (set)
-  //     this._confirmBtn.addEventListener('click', this._confirm);
-  //   else
-  //     this._confirmBtn.removeEventListener('click', this._confirm);
-  // }
-
   open(handleConfirm) {
     this._handleConfirm = handleConfirm;
-    //this._toggleSubmitListener(true);
     super.open();
   }
 
